@@ -60,9 +60,9 @@ export default function HomePage() {
       <NavBar />
 
       {/* ─── HERO SECTION ─────────────────────────────────── */}
-      <section className="hero-section noise-overlay">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-24 relative z-10">
-          <div className="max-w-4xl">
+      <section className="hero-section noise-overlay text-center relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 relative z-10 flex flex-col items-center">
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8"
+              className="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6"
               style={{ color: "var(--text-primary)" }}
             >
               {t("heroTitle1")}
@@ -110,7 +110,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl mb-12 max-w-2xl leading-relaxed"
+              className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
               {t("heroDesc")}
@@ -120,38 +120,41 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap gap-6"
+              className="flex flex-col sm:flex-row flex-wrap gap-6 justify-center items-center w-full sm:w-auto mt-4"
             >
-              <motion.button
+              {/* Primary CTA: Explore Food */}
+              <button
                 onClick={() => {
                   document
                     .getElementById("restaurant-section")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-10 py-5 rounded-2xl font-bold text-white text-lg"
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white text-lg flex justify-center items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                 style={{
-                  background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
-                  boxShadow: "0 8px 32px rgba(245,166,35,0.4)",
+                  background: "linear-gradient(135deg, #FF6B6B, #F5A623)",
                 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
               >
                 🍜 {t("exploreBtn")}
-              </motion.button>
+              </button>
 
-              <motion.button
-                onClick={() => setShowMap(!showMap)}
-                className="px-10 py-5 rounded-2xl font-bold text-lg border-2"
-                style={{
-                  borderColor: "var(--border-color)",
-                  color: "var(--text-primary)",
-                  background: "var(--bg-card)",
+              {/* Secondary CTA: Food Map */}
+              <button
+                onClick={() => {
+                  setShowMap(true);
+                  setTimeout(() => {
+                    document.getElementById("map-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }, 100);
                 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-lg flex justify-center items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 border-2"
+                style={{
+                  borderColor: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
+                  color: "var(--text-primary)",
+                  background: isDark ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.5)",
+                  backdropFilter: "blur(12px)",
+                }}
               >
                 🗺️ {t("mapBtn")}
-              </motion.button>
+              </button>
             </motion.div>
           </div>
 
@@ -191,8 +194,8 @@ export default function HomePage() {
           padding: "32px 0",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
             {STATS.map((stat, i) => (
               <motion.div
                 key={i}
@@ -225,27 +228,30 @@ export default function HomePage() {
       <AnimatePresence>
         {showMap && (
           <motion.section
+            id="map-section"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="text-4xl">🗺️</span>
-                <div>
-                  <h2
-                    className="text-3xl font-black"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {t("mapTitle")}
-                  </h2>
-                  <p className="text-base mt-1" style={{ color: "var(--text-muted)" }}>
-                    {t("mapDesc")}
-                  </p>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-4">
+                  <span className="text-4xl">🗺️</span>
+                  <div>
+                    <h2
+                      className="text-2xl font-black"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {t("mapTitle")}
+                    </h2>
+                    <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
+                      {t("mapDesc")}
+                    </p>
+                  </div>
                 </div>
                 <div
-                  className="ml-auto text-sm px-4 py-2 rounded-full font-medium"
+                  className="inline-flex text-xs px-3 py-1.5 rounded-full font-medium"
                   style={{
                     background: isDark ? "rgba(0,212,255,0.1)" : "rgba(245,166,35,0.1)",
                     color: isDark ? "#00D4FF" : "#F5A623",
@@ -264,7 +270,7 @@ export default function HomePage() {
       {/* ─── RESTAURANT SECTION ───────────────────────────── */}
       <section
         id="restaurant-section"
-        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -273,12 +279,12 @@ export default function HomePage() {
           className="mb-10"
         >
           <h2
-            className="text-4xl font-black mb-3"
+            className="text-3xl font-black mb-2"
             style={{ color: "var(--text-primary)" }}
           >
             {t("restaurantsTitle")}
           </h2>
-          <p className="text-lg" style={{ color: "var(--text-muted)" }}>
+          <p className="text-base" style={{ color: "var(--text-muted)" }}>
             {t("restaurantsDesc", { count: filteredRestaurants.length })}
           </p>
         </motion.div>
@@ -303,13 +309,13 @@ export default function HomePage() {
 
       {/* ─── FOOTER ───────────────────────────────────────── */}
       <footer
-        className="mt-20 py-16 text-center"
+        className="mt-16 py-12 text-center"
         style={{
           borderTop: "1px solid var(--border-color)",
           background: "var(--bg-secondary)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-4xl mb-4"
             animate={{ rotate: [0, 15, -15, 0] }}

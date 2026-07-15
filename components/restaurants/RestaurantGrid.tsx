@@ -21,7 +21,7 @@ export default function RestaurantGrid({
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
         {Array.from({ length: 6 }).map((_, i) => (
           <motion.div
             key={i}
@@ -58,7 +58,7 @@ export default function RestaurantGrid({
     <LayoutGroup>
       <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10"
       >
         <AnimatePresence mode="popLayout">
           {restaurants.map((restaurant, index) => (

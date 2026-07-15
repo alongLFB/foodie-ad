@@ -44,6 +44,9 @@ export interface Restaurant {
   funnyQuote: string; // 幽默点评
   funnyQuoteZh?: string;
   priceLevel: 1 | 2 | 3 | 4; // 💰 to 💰💰💰💰
+  hours?: string;
+  phone?: string;
+  googleMapsUrl?: string;
   status: RestaurantStatus;
   submittedBy?: string;
   createdAt: string;

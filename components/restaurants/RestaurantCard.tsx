@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Restaurant, CATEGORY_EMOJI } from "@/types";
+import RestaurantModal from "./RestaurantModal";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -21,6 +22,7 @@ export function RestaurantCard({
   const locale = useLocale();
   const [imgLoaded, setImgLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const isAvoid = restaurant.rating < 2.5;
 
   const name = locale === "zh" && restaurant.nameZh ? restaurant.nameZh : restaurant.name;
@@ -28,19 +30,11 @@ export function RestaurantCard({
 
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const shareUrl = `https://foodie-ad.alonglfb.com/restaurants/${restaurant.id}`;
-    const text = locale === "zh"
-        ? `如果你不请我吃这家店，我们就绝交吧！👇 ${shareUrl}`
-        : `If you don't take me here, we're done! 👇 ${shareUrl}`;
-
-    if (navigator.share) {
-      navigator.share({ title: name, text, url: shareUrl });
-    } else {
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
-    }
+    setIsModalOpen(true);
   };
 
   return (
+    <>
     <motion.article
       className={`restaurant-card ${isAvoid ? "avoid-card" : ""}`}
       initial={{ opacity: 0, y: 30 }}
@@ -56,9 +50,10 @@ export function RestaurantCard({
       layout
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      onClick={() => setIsModalOpen(true)}
     >
       {/* Image section */}
-      <div className="relative h-56 overflow-hidden">
+      <div className="relative h-64 overflow-hidden">
         {!imgLoaded && (
           <div className="absolute inset-0 skeleton flex items-center justify-center">
             <span className="fun-loader-chopsticks text-3xl opacity-40">🥢</span>
@@ -117,9 +112,9 @@ export function RestaurantCard({
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="px-6 pt-6 pb-8 flex flex-col min-h-0 relative">
         <h3
-          className="font-bold text-xl mb-2 line-clamp-1"
+          className="font-bold text-2xl mb-3 line-clamp-1"
           style={{ color: "var(--text-primary)" }}
         >
           {name}
@@ -190,5 +185,11 @@ export function RestaurantCard({
         )}
       </div>
     </motion.article>
+    <RestaurantModal 
+      restaurant={restaurant} 
+      isOpen={isModalOpen} 
+      onClose={() => setIsModalOpen(false)} 
+    />
+    </>
   );
 }

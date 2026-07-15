@@ -82,7 +82,7 @@ export default function NavBar() {
             {/* Language Toggle */}
             <motion.button
               onClick={toggleLocale}
-              className="px-4 py-2 rounded-full text-sm font-bold border-2 transition-all"
+              className="px-5 py-2.5 rounded-full text-sm font-bold border-2 transition-all"
               style={{
                 borderColor: "var(--color-saffron)",
                 color: "var(--color-saffron)",
