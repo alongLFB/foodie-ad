@@ -18,14 +18,10 @@ export default function VibeFilter({
 
   return (
     <div className="w-full">
-      <div className="flex items-center gap-3 mb-6">
-        <span className="text-3xl">🧭</span>
-        <h2
-          className="font-bold text-xl"
-          style={{ color: "var(--text-primary)" }}
-        >
-          {lang === "zh" ? "现在是什么吃货状态？" : "What's your vibe right now?"}
-        </h2>
+      <div className="mb-4">
+        <span className="text-sm font-bold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
+          {lang === "zh" ? "🧭 快速筛选吃货状态：" : "🧭 Filter by vibe:"}
+        </span>
       </div>
 
       <div className="flex flex-wrap gap-4">

@@ -262,7 +262,7 @@ export default function HomePage() {
                       color: "var(--text-primary)",
                     }}
                   >
-                    🔼 {locale === "zh" ? "收起地图" : "Collapse"}
+                    🔼 {t("collapseMap")}
                   </button>
                   <div
                     className="inline-flex text-xs px-3 py-1.5 rounded-full font-medium"
@@ -290,17 +290,20 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b"
+          style={{ borderColor: "var(--border-color)" }}
         >
-          <h2
-            className="text-3xl font-black mb-2"
-            style={{ color: "var(--text-primary)" }}
-          >
-            {t("restaurantsTitle")}
-          </h2>
-          <p className="text-base" style={{ color: "var(--text-muted)" }}>
-            {t("restaurantsDesc", { count: filteredRestaurants.length })}
-          </p>
+          <div>
+            <h2
+              className="text-4xl font-black mb-2 flex items-center gap-3"
+              style={{ color: "var(--text-primary)" }}
+            >
+              <span className="text-5xl">🏆</span> {t("restaurantsTitle").replace("🏆 ", "")}
+            </h2>
+            <p className="text-lg font-medium" style={{ color: "var(--text-muted)" }}>
+              {t("restaurantsDesc", { count: filteredRestaurants.length })}
+            </p>
+          </div>
         </motion.div>
 
         <motion.div
