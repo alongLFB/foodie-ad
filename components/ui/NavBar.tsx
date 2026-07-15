@@ -1,13 +1,19 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "next-themes";
+import { useTranslations, useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 export default function NavBar() {
+  const t = useTranslations("NavBar");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  
   const [scrolled, setScrolled] = useState(false);
-  const [langZh, setLangZh] = useState(false);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -19,6 +25,11 @@ export default function NavBar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleLocale = () => {
+    const nextLocale = locale === "en" ? "zh" : "en";
+    router.replace(pathname, { locale: nextLocale });
+  };
 
   return (
     <motion.nav
@@ -36,17 +47,18 @@ export default function NavBar() {
         borderBottom: scrolled ? `1px solid var(--border-color)` : "none",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div
-            className="flex items-center gap-2"
+            className="flex items-center gap-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
+            onClick={() => router.push("/")}
           >
-            <span className="text-2xl">🍽️</span>
+            <span className="text-3xl">🍽️</span>
             <div>
               <span
-                className="font-black text-xl"
+                className="font-black text-2xl tracking-tight"
                 style={{
                   background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
                   WebkitBackgroundClip: "text",
@@ -57,20 +69,20 @@ export default function NavBar() {
                 Foodie-AD
               </span>
               <div
-                className="text-xs font-medium"
+                className="text-xs font-medium tracking-wide mt-0.5"
                 style={{ color: "var(--text-muted)" }}
               >
-                {langZh ? "阿布扎比最毒舌美食指南" : "Abu Dhabi's Funniest Food Guide"}
+                {t("subtitle")}
               </div>
             </div>
           </motion.div>
 
           {/* Right Controls */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             {/* Language Toggle */}
             <motion.button
-              onClick={() => setLangZh(!langZh)}
-              className="px-3 py-1.5 rounded-full text-sm font-semibold border-2 transition-all"
+              onClick={toggleLocale}
+              className="px-4 py-2 rounded-full text-sm font-bold border-2 transition-all"
               style={{
                 borderColor: "var(--color-saffron)",
                 color: "var(--color-saffron)",
@@ -79,7 +91,7 @@ export default function NavBar() {
               whileHover={{ scale: 1.05, backgroundColor: "rgba(245, 166, 35, 0.1)" }}
               whileTap={{ scale: 0.95 }}
             >
-              {langZh ? "🇺🇸 EN" : "🇨🇳 中文"}
+              {locale === "en" ? "🇨🇳 中文" : "🇺🇸 EN"}
             </motion.button>
 
             <ThemeToggle />

@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Restaurant, VibeTag } from "@/types";
 import { RestaurantCard } from "./RestaurantCard";
 import { BurgerSkeletonCard } from "@/components/loaders/FunLoader";
@@ -9,18 +10,18 @@ interface RestaurantGridProps {
   restaurants: Restaurant[];
   loading?: boolean;
   activeVibe?: VibeTag | null;
-  lang?: "en" | "zh";
 }
 
 export default function RestaurantGrid({
   restaurants,
   loading = false,
   activeVibe,
-  lang = "en",
 }: RestaurantGridProps) {
+  const t = useTranslations("Grid");
+
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {Array.from({ length: 6 }).map((_, i) => (
           <motion.div
             key={i}
@@ -43,13 +44,11 @@ export default function RestaurantGrid({
         className="flex flex-col items-center justify-center py-20 gap-4"
       >
         <span className="text-6xl">😭</span>
-        <p className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-          {lang === "zh" ? "这个场景下没有找到餐厅" : "No restaurants for this vibe"}
+        <p className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
+          {t("noResults")}
         </p>
-        <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-          {lang === "zh"
-            ? "换个心情试试？或者你来爆料一家！"
-            : "Try another vibe or be the first to submit one!"}
+        <p className="text-base" style={{ color: "var(--text-muted)" }}>
+          {t("tryAnother")}
         </p>
       </motion.div>
     );
@@ -59,14 +58,13 @@ export default function RestaurantGrid({
     <LayoutGroup>
       <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         <AnimatePresence mode="popLayout">
           {restaurants.map((restaurant, index) => (
             <RestaurantCard
               key={restaurant.id}
               restaurant={restaurant}
-              lang={lang}
               index={index}
             />
           ))}

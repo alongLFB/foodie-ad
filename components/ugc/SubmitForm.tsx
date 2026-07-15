@@ -10,7 +10,6 @@ import { useDropzone } from "react-dropzone";
 
 interface SubmitFormProps {
   onClose: () => void;
-  lang?: "en" | "zh";
 }
 
 const AREAS = [
@@ -34,7 +33,11 @@ const CATEGORIES: { value: FoodCategory; label: string }[] = [
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-export default function SubmitForm({ onClose, lang = "en" }: SubmitFormProps) {
+import { useLocale } from "next-intl";
+
+export default function SubmitForm({ onClose }: SubmitFormProps) {
+  const locale = useLocale();
+  const lang = locale === "zh" ? "zh" : "en";
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);

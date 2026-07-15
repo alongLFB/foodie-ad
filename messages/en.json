@@ -1,0 +1,57 @@
+{
+  "Index": {
+    "heroEyebrow": "Abu Dhabi's Most Brutally Honest Food Guide",
+    "heroTitle1": "Abu Dhabi Food,",
+    "heroTitle2": "No BS Reviews",
+    "heroDesc": "From Michelin-star splurges to hidden shawarma gems — brutally honest reviews from real foodies who actually live here.",
+    "exploreBtn": "Explore Food",
+    "mapBtn": "Food Map",
+    "statsSpots": "Reviewed Spots",
+    "statsHonest": "Honest Reviews",
+    "statsPaid": "Paid Promotions",
+    "statsSpice": "Spice Level",
+    "mapTitle": "Food Map",
+    "mapDesc": "Click any emoji to see restaurant details",
+    "mapCyberpunk": "🌃 Cyberpunk Mode",
+    "mapResort": "🌴 Resort Mode",
+    "restaurantsTitle": "🏆 All Restaurants",
+    "restaurantsDesc": "{count} spots · Brutally reviewed by real foodies",
+    "footerDesc": "Documenting every bite and disaster in Abu Dhabi, one review at a time",
+    "footerCopyright": "© 2025 Foodie-AD · foodie-ad.alonglfb.com · Made with 🍜 in Abu Dhabi"
+  },
+  "NavBar": {
+    "subtitle": "Abu Dhabi's Funniest Food Guide"
+  },
+  "Grid": {
+    "noResults": "No restaurants for this vibe",
+    "tryAnother": "Try another vibe or be the first to submit one!"
+  },
+  "Card": {
+    "avoid": "Avoid",
+    "approved": "Approved",
+    "spice": "Spice:",
+    "theTea": "The Tea:",
+    "by": "By:"
+  },
+  "Submit": {
+    "btnText": "Spill The Tea",
+    "title": "Share Your Honest Review",
+    "warning": "Warning: No fake reviews allowed! Our polygraph is a spicy shawarma.",
+    "nameLabel": "Restaurant Name",
+    "namePlaceholder": "Where did you eat?",
+    "reviewLabel": "The Honest Review",
+    "reviewPlaceholder": "Be brutally honest...",
+    "aliasLabel": "Your Name/Alias",
+    "aliasPlaceholder": "Foodie_007",
+    "trapLabel": "Is it a trap?",
+    "trapYes": "Yes, absolutely avoid",
+    "trapNo": "No, it's actually good",
+    "submitBtn": "Spill The Tea",
+    "submittingBtn": "Spilling...",
+    "cancel": "Cancel",
+    "required": "Required"
+  },
+  "Vibes": {
+    "all": "All vibes"
+  }
+}

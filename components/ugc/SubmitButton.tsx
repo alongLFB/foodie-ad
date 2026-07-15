@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import SubmitForm from "./SubmitForm";
 
-interface SubmitButtonProps {
-  lang?: "en" | "zh";
-}
-
-export default function SubmitButton({ lang = "en" }: SubmitButtonProps) {
+export default function SubmitButton() {
+  const t = useTranslations("Submit");
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,7 +20,7 @@ export default function SubmitButton({ lang = "en" }: SubmitButtonProps) {
         transition={{ delay: 1.5, type: "spring", stiffness: 300 }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        aria-label={lang === "zh" ? "我要爆料" : "Submit a spot"}
+        aria-label={t("btnText")}
       >
         <motion.span
           animate={{ rotate: [0, 15, -15, 0] }}
@@ -30,7 +28,7 @@ export default function SubmitButton({ lang = "en" }: SubmitButtonProps) {
         >
           📝
         </motion.span>
-        {lang === "zh" ? "我要爆料！" : "Submit a Spot!"}
+        {t("btnText")}
       </motion.button>
 
       {/* Modal */}
@@ -50,8 +48,9 @@ export default function SubmitButton({ lang = "en" }: SubmitButtonProps) {
               exit={{ opacity: 0, y: 60, scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               onClick={(e) => e.stopPropagation()}
+              style={{ padding: '40px' }}
             >
-              <SubmitForm onClose={() => setIsOpen(false)} lang={lang} />
+              <SubmitForm onClose={() => setIsOpen(false)} />
             </motion.div>
           </motion.div>
         )}

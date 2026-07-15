@@ -1,0 +1,57 @@
+{
+  "Index": {
+    "heroEyebrow": "阿布扎比最毒舌的美食点评平台",
+    "heroTitle1": "在阿布扎比，",
+    "heroTitle2": "我们替你踩雷",
+    "heroDesc": "从茅台级奢享到路边摊回魂汤，我们用🔥毒舌+😂幽默，带你发现阿布扎比的真实美食版图。",
+    "exploreBtn": "开始探索",
+    "mapBtn": "美食地图",
+    "statsSpots": "已收录餐厅",
+    "statsHonest": "真实毒舌",
+    "statsPaid": "恰饭软文",
+    "statsSpice": "辣度上限",
+    "mapTitle": "美食地图",
+    "mapDesc": "点击 Emoji 查看餐厅详情",
+    "mapCyberpunk": "🌃 赛博朋克模式",
+    "mapResort": "🌴 度假风模式",
+    "restaurantsTitle": "🏆 全部餐厅",
+    "restaurantsDesc": "{count} 家餐厅 · 经毒舌评审团严格测评",
+    "footerDesc": "用毒舌 + 幽默，记录阿布扎比的每一口惊喜与雷区",
+    "footerCopyright": "© 2025 Foodie-AD · foodie-ad.alonglfb.com · Made with 🍜 in Abu Dhabi"
+  },
+  "NavBar": {
+    "subtitle": "阿布扎比最毒舌美食指南"
+  },
+  "Grid": {
+    "noResults": "这个场景下没有找到餐厅",
+    "tryAnother": "换个心情试试？或者你来爆料一家！"
+  },
+  "Card": {
+    "avoid": "避雷",
+    "approved": "推荐",
+    "spice": "辣度：",
+    "theTea": "毒舌点评：",
+    "by": "点评人："
+  },
+  "Submit": {
+    "btnText": "我要爆料",
+    "title": "分享你的真实评价",
+    "warning": "警告：禁止水军！我们的测谎仪是一个变态辣沙瓦玛。",
+    "nameLabel": "餐厅名称",
+    "namePlaceholder": "在哪吃的？",
+    "reviewLabel": "真实评价",
+    "reviewPlaceholder": "毫无保留地吐槽或夸奖吧...",
+    "aliasLabel": "你的名字/代号",
+    "aliasPlaceholder": "美食特工_007",
+    "trapLabel": "是雷区吗？",
+    "trapYes": "是的，快跑避雷",
+    "trapNo": "不是，真的很好吃",
+    "submitBtn": "提交爆料",
+    "submittingBtn": "提交中...",
+    "cancel": "取消",
+    "required": "必填"
+  },
+  "Vibes": {
+    "all": "全部"
+  }
+}

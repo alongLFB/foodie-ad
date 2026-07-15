@@ -1,13 +1,13 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Restaurant, CATEGORY_EMOJI } from "@/types";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
-  lang?: "en" | "zh";
   index?: number;
 }
 
@@ -15,36 +15,28 @@ const PRICE_LABELS = ["", "💰 Budget", "💰💰 Mid", "💰💰💰 Pricey", 
 
 export function RestaurantCard({
   restaurant,
-  lang = "en",
   index = 0,
 }: RestaurantCardProps) {
+  const t = useTranslations("Card");
+  const locale = useLocale();
   const [imgLoaded, setImgLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isAvoid = restaurant.rating < 2.5;
 
-  const name = lang === "zh" && restaurant.nameZh ? restaurant.nameZh : restaurant.name;
-  const quote =
-    lang === "zh" && restaurant.funnyQuoteZh
-      ? restaurant.funnyQuoteZh
-      : restaurant.funnyQuote;
-
-  const shareOgUrl = `/api/og?id=${restaurant.id}`;
+  const name = locale === "zh" && restaurant.nameZh ? restaurant.nameZh : restaurant.name;
+  const quote = locale === "zh" && restaurant.funnyQuoteZh ? restaurant.funnyQuoteZh : restaurant.funnyQuote;
 
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
     const shareUrl = `https://foodie-ad.alonglfb.com/restaurants/${restaurant.id}`;
-    const text =
-      lang === "zh"
+    const text = locale === "zh"
         ? `如果你不请我吃这家店，我们就绝交吧！👇 ${shareUrl}`
         : `If you don't take me here, we're done! 👇 ${shareUrl}`;
 
     if (navigator.share) {
       navigator.share({ title: name, text, url: shareUrl });
     } else {
-      window.open(
-        `https://wa.me/?text=${encodeURIComponent(text)}`,
-        "_blank"
-      );
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
     }
   };
 
@@ -66,7 +58,7 @@ export function RestaurantCard({
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Image section */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-56 overflow-hidden">
         {!imgLoaded && (
           <div className="absolute inset-0 skeleton flex items-center justify-center">
             <span className="fun-loader-chopsticks text-3xl opacity-40">🥢</span>
@@ -83,9 +75,9 @@ export function RestaurantCard({
         />
 
         {/* Category badge */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-4 left-4">
           <motion.div
-            className="px-2 py-1 rounded-full text-sm font-bold"
+            className="px-3 py-1.5 rounded-full text-sm font-bold shadow-lg"
             style={{
               background: "rgba(0,0,0,0.6)",
               backdropFilter: "blur(8px)",
@@ -99,22 +91,22 @@ export function RestaurantCard({
         {/* Avoid badge */}
         {isAvoid && (
           <motion.div
-            className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-black"
+            className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-black shadow-lg"
             style={{ background: "#E74C3C", color: "white" }}
             animate={{ rotate: [-2, 2, -2] }}
             transition={{ duration: 1, repeat: Infinity }}
           >
-            ⚠️ AVOID
+            ⚠️ {t("avoid").toUpperCase()}
           </motion.div>
         )}
 
         {/* Rating overlay */}
-        <div className="absolute bottom-3 right-3">
+        <div className="absolute bottom-4 right-4">
           <div
-            className="px-2 py-1 rounded-lg text-sm font-black"
+            className="px-3 py-1.5 rounded-lg text-base font-black shadow-lg"
             style={{
               background: isAvoid
-                ? "rgba(231, 76, 60, 0.9)"
+                ? "rgba(231, 76, 60, 0.95)"
                 : "rgba(245, 166, 35, 0.95)",
               color: "white",
             }}
@@ -125,9 +117,9 @@ export function RestaurantCard({
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-6">
         <h3
-          className="font-bold text-lg mb-1 line-clamp-1"
+          className="font-bold text-xl mb-2 line-clamp-1"
           style={{ color: "var(--text-primary)" }}
         >
           {name}
@@ -135,29 +127,29 @@ export function RestaurantCard({
 
         {/* Funny Quote */}
         <div
-          className="text-sm italic mb-3 line-clamp-2 rounded-lg p-2"
+          className="text-sm italic mb-4 line-clamp-2 rounded-xl p-3"
           style={{
             background: "rgba(245, 166, 35, 0.08)",
             color: "var(--text-secondary)",
-            borderLeft: "3px solid var(--color-saffron)",
+            borderLeft: "4px solid var(--color-saffron)",
           }}
         >
           "{quote}"
         </div>
 
         {/* Meta row */}
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-4">
             {/* Price */}
             <span
-              className={`text-xs font-semibold price-${restaurant.priceLevel}`}
+              className={`text-sm font-semibold price-${restaurant.priceLevel}`}
             >
               {PRICE_LABELS[restaurant.priceLevel]}
             </span>
 
             {/* Funny score */}
-            <div className="flex items-center gap-1">
-              <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-medium" style={{ color: "var(--text-muted)" }}>
                 😂×{restaurant.funnyScore}
               </span>
             </div>
@@ -166,14 +158,13 @@ export function RestaurantCard({
           {/* Share button */}
           <motion.button
             onClick={handleShare}
-            className="text-xs px-3 py-1.5 rounded-full font-semibold"
+            className="text-xs px-4 py-2 rounded-full font-bold shadow-md"
             style={{
               background: "linear-gradient(135deg, #25D366, #128C7E)",
               color: "white",
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            title={lang === "zh" ? "分享到WhatsApp" : "Share on WhatsApp"}
           >
             📤 Share
           </motion.button>
@@ -181,14 +172,15 @@ export function RestaurantCard({
 
         {/* Vibe tags */}
         {restaurant.vibes.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-3">
+          <div className="flex flex-wrap gap-2 mt-4 pt-4" style={{ borderTop: "1px dashed var(--border-color)" }}>
             {restaurant.vibes.slice(0, 3).map((vibe) => (
               <span
                 key={vibe}
-                className="text-xs px-2 py-0.5 rounded-full"
+                className="text-xs font-medium px-3 py-1 rounded-full"
                 style={{
-                  background: "var(--border-color)",
+                  background: "var(--bg-secondary)",
                   color: "var(--text-muted)",
+                  border: "1px solid var(--border-color)"
                 }}
               >
                 {vibe.replace(/-/g, " ")}

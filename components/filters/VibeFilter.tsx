@@ -2,35 +2,38 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { VIBE_OPTIONS, VibeTag } from "@/types";
+import { useLocale } from "next-intl";
 
 interface VibeFilterProps {
   selected: VibeTag | null;
   onSelect: (vibe: VibeTag | null) => void;
-  lang?: "en" | "zh";
 }
 
 export default function VibeFilter({
   selected,
   onSelect,
-  lang = "en",
 }: VibeFilterProps) {
+  const locale = useLocale();
+  const lang = locale === "zh" ? "zh" : "en";
+
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-2xl">🧭</span>
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-3xl">🧭</span>
         <h2
-          className="font-bold text-lg"
+          className="font-bold text-xl"
           style={{ color: "var(--text-primary)" }}
         >
           {lang === "zh" ? "现在是什么吃货状态？" : "What's your vibe right now?"}
         </h2>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-4">
         {/* All button */}
         <motion.button
           onClick={() => onSelect(null)}
           className={`vibe-chip ${selected === null ? "active" : ""}`}
+          style={{ padding: "10px 20px", fontSize: "15px" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           layout
@@ -47,6 +50,7 @@ export default function VibeFilter({
                 onSelect(selected === vibe.id ? null : vibe.id)
               }
               className={`vibe-chip ${selected === vibe.id ? "active" : ""}`}
+              style={{ padding: "10px 20px", fontSize: "15px" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               layout
@@ -73,7 +77,7 @@ export default function VibeFilter({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mt-3 text-sm font-medium"
+            className="mt-4 text-base font-medium"
             style={{ color: "var(--color-saffron)" }}
           >
             {lang === "zh"

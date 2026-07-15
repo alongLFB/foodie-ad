@@ -8,7 +8,6 @@ import Image from "next/image";
 
 interface FoodieMapProps {
   restaurants: Restaurant[];
-  lang?: "en" | "zh";
 }
 
 interface PopupState {
@@ -20,7 +19,11 @@ interface PopupState {
 const DARK_MAP_STYLE = "mapbox://styles/mapbox/dark-v11";
 const LIGHT_MAP_STYLE = "mapbox://styles/mapbox/outdoors-v12";
 
-export default function FoodieMap({ restaurants, lang = "en" }: FoodieMapProps) {
+import { useLocale } from "next-intl";
+
+export default function FoodieMap({ restaurants }: FoodieMapProps) {
+  const locale = useLocale();
+  const lang = locale === "zh" ? "zh" : "en";
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
