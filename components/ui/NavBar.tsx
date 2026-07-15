@@ -48,7 +48,7 @@ export default function NavBar() {
       }}
     >
       <div 
-        className="w-full max-w-[1600px] mx-auto"
+        className="w-full mx-auto"
         style={{ padding: '0 40px' }}
       >
         <div className="flex items-center justify-between h-20">

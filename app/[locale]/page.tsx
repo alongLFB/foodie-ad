@@ -62,7 +62,7 @@ export default function HomePage() {
       {/* ─── HERO SECTION ─────────────────────────────────── */}
       <section className="hero-section noise-overlay text-center relative overflow-hidden">
         <div 
-          className="w-full max-w-[1600px] mx-auto pt-40 pb-32 relative z-10 flex flex-col items-center"
+          className="w-full mx-auto pt-40 pb-32 relative z-10 flex flex-col items-center"
           style={{ paddingLeft: '40px', paddingRight: '40px' }}
         >
           <div className="max-w-5xl mx-auto flex flex-col items-center">
@@ -206,7 +206,7 @@ export default function HomePage() {
         }}
       >
         <div 
-          className="w-full max-w-[1600px] mx-auto"
+          className="w-full mx-auto"
           style={{ paddingLeft: '40px', paddingRight: '40px' }}
         >
           <div 
@@ -252,7 +252,7 @@ export default function HomePage() {
             className="overflow-hidden"
           >
             <div 
-              className="w-full max-w-[1600px] mx-auto py-10"
+              className="w-full mx-auto py-10"
               style={{ paddingLeft: '40px', paddingRight: '40px' }}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -303,7 +303,7 @@ export default function HomePage() {
 
       <section
         id="restaurant-section"
-        className="w-full max-w-[1600px] mx-auto py-16 sm:py-24"
+        className="w-full mx-auto py-16 sm:py-24"
         style={{ paddingLeft: '40px', paddingRight: '40px' }}
       >
         <motion.div
@@ -346,14 +346,16 @@ export default function HomePage() {
 
       {/* ─── FOOTER ───────────────────────────────────────── */}
       <footer
-        className="mt-16 py-12 text-center"
+        className="text-center"
         style={{
           borderTop: "1px solid var(--border-color)",
           background: "var(--bg-secondary)",
+          padding: '80px 0 60px 0',
+          marginTop: '64px',
         }}
       >
         <div 
-          className="w-full max-w-[1600px] mx-auto"
+          className="w-full mx-auto"
           style={{ paddingLeft: '40px', paddingRight: '40px' }}
         >
           <motion.div

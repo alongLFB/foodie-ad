@@ -403,8 +403,9 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         <motion.button
           type="button"
           onClick={onClose}
-          className="flex-1 py-3 rounded-xl font-semibold border-2 transition-all"
+          className="flex-1 rounded-xl font-semibold border-2 transition-all"
           style={{
+            padding: '12px 24px',
             borderColor: "var(--border-color)",
             color: "var(--text-secondary)",
             background: "transparent",
@@ -417,8 +418,9 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         <motion.button
           type="submit"
           disabled={status === "submitting"}
-          className="flex-1 py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2"
+          className="flex-1 rounded-xl font-bold text-white flex items-center justify-center gap-2"
           style={{
+            padding: '12px 24px',
             background: status === "submitting"
               ? "var(--border-color)"
               : "linear-gradient(135deg, #F5A623, #FF6B6B)",
