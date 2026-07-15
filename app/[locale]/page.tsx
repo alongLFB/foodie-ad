@@ -62,8 +62,8 @@ export default function HomePage() {
       {/* ─── HERO SECTION ─────────────────────────────────── */}
       <section className="hero-section noise-overlay text-center relative overflow-hidden">
         <div 
-          className="w-full mx-auto pt-40 pb-32 relative z-10 flex flex-col items-center"
-          style={{ paddingLeft: '40px', paddingRight: '40px' }}
+          className="w-full mx-auto relative z-10 flex flex-col items-center"
+          style={{ padding: '160px 40px 128px 40px' }}
         >
           <div className="max-w-5xl mx-auto flex flex-col items-center">
             <motion.div
@@ -252,10 +252,13 @@ export default function HomePage() {
             className="overflow-hidden"
           >
             <div 
-              className="w-full mx-auto py-10"
-              style={{ paddingLeft: '40px', paddingRight: '40px' }}
+              className="w-full mx-auto"
+              style={{ padding: '40px' }}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div 
+                className="flex flex-col sm:flex-row sm:items-center justify-between"
+                style={{ marginBottom: '24px', gap: '16px' }}
+              >
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">🗺️</span>
                   <div>
@@ -303,20 +306,25 @@ export default function HomePage() {
 
       <section
         id="restaurant-section"
-        className="w-full mx-auto py-16 sm:py-24"
-        style={{ paddingLeft: '40px', paddingRight: '40px' }}
+        className="w-full mx-auto"
+        style={{ padding: '80px 40px' }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b"
-          style={{ borderColor: "var(--border-color)" }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between"
+          style={{ 
+            marginBottom: '32px', 
+            paddingBottom: '24px', 
+            borderBottom: "1px solid var(--border-color)",
+            gap: '16px'
+          }}
         >
           <div>
             <h2
-              className="text-4xl font-black mb-2 flex items-center gap-3"
-              style={{ color: "var(--text-primary)" }}
+              className="text-4xl font-black flex items-center gap-3"
+              style={{ color: "var(--text-primary)", marginBottom: '8px' }}
             >
               <span className="text-5xl">🏆</span> {t("restaurantsTitle").replace("🏆 ", "")}
             </h2>
@@ -330,12 +338,14 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 overflow-x-auto pb-4"
+          className="overflow-x-auto"
         >
-          <VibeFilter
-            selected={activeVibe}
-            onSelect={setActiveVibe}
-          />
+          <div style={{ marginBottom: '40px' }}>
+            <VibeFilter
+              selected={activeVibe}
+              onSelect={setActiveVibe}
+            />
+          </div>
         </motion.div>
 
         <RestaurantGrid
