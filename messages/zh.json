@@ -54,5 +54,51 @@
   },
   "Vibes": {
     "all": "全部"
+  },
+  "VibeFilter": {
+    "title": "🧭 快速筛选吃货状态：",
+    "all": "🍽️ 全部",
+    "filteredPrefix": "✨ 已为你筛选\"",
+    "filteredSuffix": "\"场景"
+  },
+  "FoodieMap": {
+    "loadingMap": "地图加载中...",
+    "placeholderTitle": "美食地图加载中...",
+    "placeholderDesc": "在实际生产环境中，请在此集成 Google Maps 或 Mapbox 插件。"
+  },
+  "SubmitForm": {
+    "successTitle": "提交成功！",
+    "successDesc1": "🔍 管理员正在饿着肚子快马加鞭审核中，通过后即可展示！",
+    "successDesc2": "（请不要投喂管理员，审核会更快）",
+    "close": "关闭",
+    "mainTitle": "我要爆料！",
+    "mainDesc": "爆料好店 / 踩雷避坑，都欢迎！",
+    "nameLabel": "🏪 餐厅名称 *",
+    "namePlaceholder": "餐厅叫啥名？",
+    "reviewLabel": "📣 你的评价 *",
+    "reviewPlaceholder": "别写小作文，夸到点子上！（或者把踩雷经历分享出来）",
+    "addressLabel": "📍 地址 *",
+    "addressPlaceholder": "大概在哪儿？",
+    "areaLabel": "🗺️ 区域 *",
+    "areaSelect": "选择区域",
+    "categoryLabel": "🍽️ 餐厅类型 *",
+    "categorySelect": "选择类型",
+    "vibeLabel": "🧭 适合场景 *（可多选）",
+    "funnyScoreLabel": "😂 毒舌评分 * — ",
+    "funnyScoreDesc0": "",
+    "funnyScoreDesc1": "根本不好吃！",
+    "funnyScoreDesc2": "就那样吧",
+    "funnyScoreDesc3": "还不错",
+    "funnyScoreDesc4": "很推荐！",
+    "funnyScoreDesc5": "人间绝品！",
+    "uploadLabel": "📸 上传图片（可选）",
+    "uploadDrop": "放开！",
+    "uploadHint": "拖拽或点击上传（最大5MB）",
+    "nicknameLabel": "👤 你的昵称（可选）",
+    "nicknamePlaceholder": "匿名吃货也没关系",
+    "cancel": "取消",
+    "submitting": "提交中...",
+    "submitBtn": "提交爆料！",
+    "errorMsg": "❌ 提交失败，请再试一次"
   }
 }

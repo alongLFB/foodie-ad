@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { VIBE_OPTIONS, VibeTag } from "@/types";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface VibeFilterProps {
   selected: VibeTag | null;
@@ -14,17 +14,17 @@ export default function VibeFilter({
   onSelect,
 }: VibeFilterProps) {
   const locale = useLocale();
-  const lang = locale === "zh" ? "zh" : "en";
+  const t = useTranslations("VibeFilter");
 
   return (
     <div className="w-full">
-      <div className="mb-4">
+      <div style={{ marginBottom: '16px' }}>
         <span className="text-sm font-bold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
-          {lang === "zh" ? "🧭 快速筛选吃货状态：" : "🧭 Filter by vibe:"}
+          {t("title")}
         </span>
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap" style={{ gap: '16px' }}>
         {/* All button */}
         <motion.button
           onClick={() => onSelect(null)}
@@ -34,7 +34,7 @@ export default function VibeFilter({
           whileTap={{ scale: 0.95 }}
           layout
         >
-          {lang === "zh" ? "🍽️ 全部" : "🍽️ Show All"}
+          {t("all")}
         </motion.button>
 
         {/* Vibe chips */}
@@ -59,8 +59,7 @@ export default function VibeFilter({
                 damping: 25,
               }}
             >
-              {vibe.emoji}{" "}
-              {lang === "zh" ? vibe.labelZh : vibe.labelEn}
+              {vibe.emoji} {locale === "zh" ? vibe.labelZh : vibe.labelEn}
             </motion.button>
           ))}
         </AnimatePresence>
@@ -76,9 +75,7 @@ export default function VibeFilter({
             className="mt-4 text-base font-medium"
             style={{ color: "var(--color-saffron)" }}
           >
-            {lang === "zh"
-              ? `✨ 已为你筛选"${VIBE_OPTIONS.find((v) => v.id === selected)?.labelZh}"场景`
-              : `✨ Filtered to "${VIBE_OPTIONS.find((v) => v.id === selected)?.labelEn}" vibe`}
+            {t("filteredPrefix")}{locale === "zh" ? VIBE_OPTIONS.find((v) => v.id === selected)?.labelZh : VIBE_OPTIONS.find((v) => v.id === selected)?.labelEn}{t("filteredSuffix")}
           </motion.div>
         )}
       </AnimatePresence>

@@ -33,10 +33,11 @@ const CATEGORIES: { value: FoodCategory; label: string }[] = [
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function SubmitForm({ onClose }: SubmitFormProps) {
   const locale = useLocale();
+  const t = useTranslations("SubmitForm");
   const lang = locale === "zh" ? "zh" : "en";
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -115,23 +116,19 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
             className="text-2xl font-black mb-3"
             style={{ color: "var(--text-primary)" }}
           >
-            {lang === "zh" ? "提交成功！" : "Submitted! 🍽️"}
+            {t("successTitle")}
           </h3>
           <p
             className="text-base leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
-            {lang === "zh"
-              ? "🔍 管理员正在饿着肚子快马加鞭审核中，通过后即可展示！"
-              : "🔍 Our admin is frantically reviewing on an empty stomach — it'll show up once approved!"}
+            {t("successDesc1")}
           </p>
           <p
             className="text-sm mt-2 italic"
             style={{ color: "var(--text-muted)" }}
           >
-            {lang === "zh"
-              ? "（请不要投喂管理员，审核会更快）"
-              : "(We cannot guarantee reviews go faster with bribery... but it probably helps)"}
+            {t("successDesc2")}
           </p>
         </div>
         <motion.button
@@ -143,7 +140,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {lang === "zh" ? "关闭" : "Close"}
+          {t("close")}
         </motion.button>
       </motion.div>
     );
@@ -157,24 +154,22 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           className="text-2xl font-black mt-2"
           style={{ color: "var(--text-primary)" }}
         >
-          {lang === "zh" ? "我要爆料！" : "Submit a Spot!"}
+          {t("mainTitle")}
         </h2>
         <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-          {lang === "zh"
-            ? "爆料好店 / 踩雷避坑，都欢迎！"
-            : "Share the gems AND the disasters — we want both!"}
+          {t("mainDesc")}
         </p>
       </div>
 
       {/* Restaurant Name */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "🏪 餐厅名称 *" : "🏪 Restaurant Name *"}
+          {t("nameLabel")}
         </label>
         <input
           {...register("name")}
           className={`form-input ${errors.name ? "error" : ""}`}
-          placeholder={lang === "zh" ? "餐厅叫啥名？" : "What's this place called?"}
+          placeholder={t("namePlaceholder")}
         />
         {errors.name && (
           <p className="form-error">{errors.name.message}</p>
@@ -184,16 +179,14 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Description / Funny Review */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "📣 你的评价 *" : "📣 Your Hot Take *"}
+          {t("reviewLabel")}
         </label>
         <textarea
           {...register("description")}
           className={`form-input ${errors.description ? "error" : ""}`}
           rows={3}
           placeholder={
-            lang === "zh"
-              ? "别写小作文，夸到点子上！（或者把踩雷经历分享出来）"
-              : "Don't write an essay — keep it punchy! (Or roast it mercilessly)"
+            t("reviewPlaceholder")
           }
           style={{ resize: "vertical" }}
         />
@@ -221,12 +214,12 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="form-label">
-            {lang === "zh" ? "📍 地址 *" : "📍 Address *"}
+            {t("addressLabel")}
           </label>
           <input
             {...register("address")}
             className={`form-input ${errors.address ? "error" : ""}`}
-            placeholder={lang === "zh" ? "大概在哪儿？" : "Rough address"}
+            placeholder={t("addressPlaceholder")}
           />
           {errors.address && (
             <p className="form-error">{errors.address.message}</p>
@@ -234,13 +227,13 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         </div>
         <div>
           <label className="form-label">
-            {lang === "zh" ? "🗺️ 区域 *" : "🗺️ Area *"}
+            {t("areaLabel")}
           </label>
           <select
             {...register("area")}
             className={`form-input ${errors.area ? "error" : ""}`}
           >
-            <option value="">{lang === "zh" ? "选择区域" : "Select area"}</option>
+            <option value="">{t("areaSelect")}</option>
             {AREAS.map((a) => (
               <option key={a} value={a}>{a}</option>
             ))}
@@ -252,13 +245,13 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Category */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "🍽️ 餐厅类型 *" : "🍽️ Category *"}
+          {t("categoryLabel")}
         </label>
         <select
           {...register("category")}
           className={`form-input ${errors.category ? "error" : ""}`}
         >
-          <option value="">{lang === "zh" ? "选择类型" : "Select category"}</option>
+          <option value="">{t("categorySelect")}</option>
           {CATEGORIES.map((c) => (
             <option key={c.value} value={c.value}>{c.label}</option>
           ))}
@@ -269,7 +262,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Vibe Tags */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "🧭 适合场景 *（可多选）" : "🧭 Best Vibes * (multi-select)"}
+          {t("vibeLabel")}
         </label>
         <Controller
           name="vibes"
@@ -295,7 +288,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
                       );
                     }}
                   >
-                    {vibe.emoji} {lang === "zh" ? vibe.labelZh : vibe.labelEn}
+                    {vibe.emoji} {locale === "zh" ? vibe.labelZh : vibe.labelEn}
                   </motion.button>
                 );
               })}
@@ -310,9 +303,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Funny Score */}
       <div>
         <label className="form-label">
-          {lang === "zh"
-            ? `😂 毒舌评分 * — ${["", "根本不好吃！", "就那样吧", "还不错", "很推荐！", "人间绝品！"][funnyScore]}`
-            : `😂 Funny Score * — ${["", "Total disaster!", "Meh...", "Pretty good!", "Highly recommended!", "Life-changing!"][funnyScore]}`}
+          {t("funnyScoreLabel")} {t(`funnyScoreDesc${funnyScore}` as any)}
         </label>
         <div className="flex gap-2 mt-2">
           {[1, 2, 3, 4, 5].map((score) => (
@@ -340,7 +331,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Image Upload */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "📸 上传图片（可选）" : "📸 Upload Photo (optional)"}
+          {t("uploadLabel")}
         </label>
         <div
           {...getRootProps()}
@@ -376,10 +367,8 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
               <span className="text-3xl">📷</span>
               <p className="text-sm mt-2" style={{ color: "var(--text-muted)" }}>
                 {isDragActive
-                  ? (lang === "zh" ? "放开！" : "Drop it!")
-                  : lang === "zh"
-                  ? "拖拽或点击上传（最大5MB）"
-                  : "Drag & drop or click (max 5MB)"}
+                  ? (t("uploadDrop"))
+                  : t("uploadHint")}
               </p>
             </div>
           )}
@@ -389,12 +378,12 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       {/* Submitter Name (optional) */}
       <div>
         <label className="form-label">
-          {lang === "zh" ? "👤 你的昵称（可选）" : "👤 Your nickname (optional)"}
+          {t("nicknameLabel")}
         </label>
         <input
           {...register("submitterName")}
           className="form-input"
-          placeholder={lang === "zh" ? "匿名吃货也没关系" : "Anonymous foodie is fine too"}
+          placeholder={t("nicknamePlaceholder")}
         />
       </div>
 
@@ -413,7 +402,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          {lang === "zh" ? "取消" : "Cancel"}
+          {t("cancel")}
         </motion.button>
         <motion.button
           type="submit"
@@ -432,11 +421,11 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           {status === "submitting" ? (
             <>
               <span className="fun-loader-chopsticks text-lg">🥢</span>
-              {lang === "zh" ? "提交中..." : "Submitting..."}
+              {t("submitting")}
             </>
           ) : (
             <>
-              🚀 {lang === "zh" ? "提交爆料！" : "Submit Spot!"}
+              🚀 {t("submitBtn")}
             </>
           )}
         </motion.button>
@@ -449,7 +438,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           className="text-center text-sm"
           style={{ color: "var(--color-coral)" }}
         >
-          {lang === "zh" ? "❌ 提交失败，请再试一次" : "❌ Submission failed, please try again"}
+          {t("errorMsg")}
         </motion.p>
       )}
     </form>

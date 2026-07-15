@@ -19,11 +19,12 @@ interface PopupState {
 const DARK_MAP_STYLE = "mapbox://styles/mapbox/dark-v11";
 const LIGHT_MAP_STYLE = "mapbox://styles/mapbox/outdoors-v12";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FoodieMap({ restaurants }: FoodieMapProps) {
   const locale = useLocale();
   const lang = locale === "zh" ? "zh" : "en";
+  const t = useTranslations("FoodieMap");
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -138,15 +139,11 @@ export default function FoodieMap({ restaurants }: FoodieMapProps) {
           border: "2px dashed var(--border-color)",
         }}
       >
-        <div className="text-center p-8">
-          <div className="text-5xl mb-4">🗺️</div>
-          <p className="font-bold text-lg mb-2" style={{ color: "var(--text-primary)" }}>
-            {lang === "zh" ? "美食地图加载中..." : "Food Map Placeholder"}
-          </p>
-          <p className="text-sm mb-4" style={{ color: "var(--text-muted)" }}>
-            {lang === "zh"
-              ? "请在 .env.local 中配置 NEXT_PUBLIC_MAPBOX_TOKEN"
-              : "Add NEXT_PUBLIC_MAPBOX_TOKEN to .env.local"}
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-3xl z-10 p-8 text-center border-2 border-dashed border-[var(--border-color)]">
+          <span className="text-6xl mb-4 animate-pulse">🗺️</span>
+          <h3 className="text-2xl font-black mb-2">{t("placeholderTitle")}</h3>
+          <p className="text-lg text-[var(--text-muted)] max-w-md mx-auto">
+            {t("placeholderDesc")}
           </p>
           {/* Show restaurant pins as emoji grid instead */}
           <div className="flex flex-wrap justify-center gap-4 mt-4">
@@ -176,7 +173,6 @@ export default function FoodieMap({ restaurants }: FoodieMapProps) {
           {popup && (
             <RestaurantPopup
               restaurant={popup.restaurant}
-              lang={lang}
               onClose={() => setPopup(null)}
             />
           )}
@@ -195,17 +191,11 @@ export default function FoodieMap({ restaurants }: FoodieMapProps) {
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ background: "var(--bg-primary)" }}
+            className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50 rounded-3xl"
           >
-            <div className="text-center">
-              <span className="fun-loader-wok text-4xl">🍳</span>
-              <p
-                className="mt-3 text-sm"
-                style={{ color: "var(--text-muted)" }}
-              >
-                {lang === "zh" ? "地图加载中..." : "Loading map..."}
-              </p>
+            <div className="bg-[var(--bg-card)] px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-3">
+              <span className="fun-loader-chopsticks text-2xl">🥢</span>
+              <span className="font-bold">{t("loadingMap")}</span>
             </div>
           </motion.div>
         )}

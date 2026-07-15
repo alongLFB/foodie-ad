@@ -54,5 +54,51 @@
   },
   "Vibes": {
     "all": "All vibes"
+  },
+  "VibeFilter": {
+    "title": "🧭 Filter by vibe:",
+    "all": "🍽️ Show All",
+    "filteredPrefix": "✨ Filtered to \"",
+    "filteredSuffix": "\" vibe"
+  },
+  "FoodieMap": {
+    "loadingMap": "Loading map...",
+    "placeholderTitle": "Food Map Placeholder",
+    "placeholderDesc": "In production, integrate with Google Maps / Mapbox here."
+  },
+  "SubmitForm": {
+    "successTitle": "Submitted! 🍽️",
+    "successDesc1": "🔍 Our admin is frantically reviewing on an empty stomach — it'll show up once approved!",
+    "successDesc2": "(We cannot guarantee reviews go faster with bribery... but it probably helps)",
+    "close": "Close",
+    "mainTitle": "Submit a Spot!",
+    "mainDesc": "Share the gems AND the disasters — we want both!",
+    "nameLabel": "🏪 Restaurant Name *",
+    "namePlaceholder": "What's this place called?",
+    "reviewLabel": "📣 Your Hot Take *",
+    "reviewPlaceholder": "Don't write an essay — keep it punchy! (Or roast it mercilessly)",
+    "addressLabel": "📍 Address *",
+    "addressPlaceholder": "Rough address",
+    "areaLabel": "🗺️ Area *",
+    "areaSelect": "Select area",
+    "categoryLabel": "🍽️ Category *",
+    "categorySelect": "Select category",
+    "vibeLabel": "🧭 Best Vibes * (multi-select)",
+    "funnyScoreLabel": "😂 Funny Score * — ",
+    "funnyScoreDesc0": "",
+    "funnyScoreDesc1": "Total disaster!",
+    "funnyScoreDesc2": "Meh...",
+    "funnyScoreDesc3": "Pretty good!",
+    "funnyScoreDesc4": "Highly recommended!",
+    "funnyScoreDesc5": "Life-changing!",
+    "uploadLabel": "📸 Upload Photo (optional)",
+    "uploadDrop": "Drop it!",
+    "uploadHint": "Drag & drop or click (max 5MB)",
+    "nicknameLabel": "👤 Your nickname (optional)",
+    "nicknamePlaceholder": "Anonymous foodie is fine too",
+    "cancel": "Cancel",
+    "submitting": "Submitting...",
+    "submitBtn": "Submit Spot!",
+    "errorMsg": "❌ Submission failed, please try again"
   }
 }
