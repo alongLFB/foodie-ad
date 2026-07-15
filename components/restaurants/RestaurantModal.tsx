@@ -88,7 +88,10 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
             className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-[32px] overflow-hidden shadow-2xl z-10 flex flex-col max-h-[90vh]"
           >
             {/* Header Image */}
-            <div className="relative h-64 sm:h-80 w-full shrink-0">
+            <div 
+              className="relative h-64 sm:h-80 shrink-0"
+              style={{ margin: '24px 24px 0 24px', borderRadius: '24px', overflow: 'hidden' }}
+            >
               <Image
                 src={restaurant.coverImage}
                 alt={name}
@@ -102,12 +105,18 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                 ✕
               </button>
               
-              <div className="absolute top-4 left-4 flex gap-2">
-                <div className="px-3 py-1.5 rounded-full text-sm font-bold bg-black/60 backdrop-blur-md text-white">
+              <div className="absolute flex" style={{ top: '16px', left: '16px', gap: '8px' }}>
+                <div 
+                  className="rounded-full text-sm font-bold bg-black/60 backdrop-blur-md text-white"
+                  style={{ padding: '8px 16px' }}
+                >
                   {CATEGORY_EMOJI[restaurant.category]} {restaurant.area}
                 </div>
                 {isAvoid && (
-                  <div className="px-3 py-1.5 rounded-full text-xs font-black bg-[#E74C3C] text-white">
+                  <div 
+                    className="rounded-full text-xs font-black bg-[#E74C3C] text-white"
+                    style={{ padding: '8px 16px' }}
+                  >
                     ⚠️ {t("avoid").toUpperCase()}
                   </div>
                 )}
@@ -115,14 +124,15 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
             </div>
 
             {/* Content Body */}
-            <div className="p-8 overflow-y-auto">
+            <div className="overflow-y-auto" style={{ padding: '24px 32px 32px 32px' }}>
               <div className="flex justify-between items-start gap-4 mb-4">
                 <h2 className="text-3xl font-black text-[var(--text-primary)] leading-tight">
                   {name}
                 </h2>
                 <div
-                  className="shrink-0 px-4 py-2 rounded-xl text-lg font-black"
+                  className="shrink-0 rounded-xl text-lg font-black"
                   style={{
+                    padding: '8px 16px',
                     background: isAvoid ? "rgba(231, 76, 60, 0.1)" : "rgba(245, 166, 35, 0.1)",
                     color: isAvoid ? "#E74C3C" : "#F5A623",
                   }}
@@ -133,8 +143,9 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
 
               {/* Quotes & Vibes */}
               <div
-                className="text-lg italic mb-6 rounded-2xl p-4"
+                className="text-lg italic mb-6 rounded-2xl"
                 style={{
+                  padding: '16px 20px',
                   background: "rgba(245, 166, 35, 0.08)",
                   color: "var(--text-secondary)",
                   borderLeft: "4px solid var(--color-saffron)",
@@ -177,8 +188,12 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
               <button
                 onClick={handleShare}
                 disabled={isGenerating}
-                className="w-full py-4 rounded-2xl font-bold text-white text-lg flex items-center justify-center gap-2 shadow-lg disabled:opacity-70 transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{ background: "linear-gradient(135deg, #F5A623, #FF6B6B)" }}
+                className="w-full rounded-2xl font-bold text-white text-lg flex items-center justify-center shadow-lg disabled:opacity-70 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                style={{ 
+                  padding: '16px 24px',
+                  gap: '8px',
+                  background: "linear-gradient(135deg, #F5A623, #FF6B6B)" 
+                }}
               >
                 {isGenerating ? "生成中..." : "📸 导出分享海报"}
               </button>

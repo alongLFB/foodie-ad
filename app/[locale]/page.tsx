@@ -120,7 +120,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-6 justify-center items-center w-full sm:w-auto mt-4"
+              className="flex flex-col sm:flex-row gap-6 mt-12 pt-4 w-full justify-center"
             >
               {/* Primary CTA: Explore Food */}
               <button
@@ -129,12 +129,15 @@ export default function HomePage() {
                     .getElementById("restaurant-section")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-white text-lg flex justify-center items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                className="w-full sm:w-auto rounded-2xl font-bold text-lg flex justify-center items-center shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
+                  padding: '16px 32px',
+                  gap: '8px',
                   background: "linear-gradient(135deg, #FF6B6B, #F5A623)",
+                  color: "white",
                 }}
               >
-                🍜 {t("exploreBtn")}
+                <span>🚀</span> {t("exploreBtn")}
               </button>
 
               {/* Secondary CTA: Food Map */}
@@ -149,15 +152,17 @@ export default function HomePage() {
                     }, 100);
                   }
                 }}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-lg flex justify-center items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 border-2"
+                className="w-full sm:w-auto rounded-2xl font-bold text-lg flex justify-center items-center transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 border-2"
                 style={{
-                  borderColor: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
-                  color: "var(--text-primary)",
-                  background: isDark ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.5)",
+                  padding: '16px 32px',
+                  gap: '8px',
+                  background: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0.6)",
                   backdropFilter: "blur(12px)",
+                  color: "var(--text-primary)",
+                  borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)",
                 }}
               >
-                🗺️ {t("mapBtn")}
+                <span>🗺️</span> {t("mapBtn")}
               </button>
             </motion.div>
           </div>
@@ -198,7 +203,10 @@ export default function HomePage() {
         }}
       >
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+          <div 
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8"
+            style={{ gap: '32px' }}
+          >
             {STATS.map((stat, i) => (
               <motion.div
                 key={i}
@@ -256,8 +264,9 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-3">
                   <button
                     onClick={() => setShowMap(false)}
-                    className="text-sm px-4 py-1.5 rounded-full font-bold shadow-sm border border-[var(--border-color)] transition-all hover:scale-105 active:scale-95"
+                    className="text-sm rounded-full font-bold shadow-sm border border-[var(--border-color)] transition-all hover:scale-105 active:scale-95"
                     style={{
+                      padding: '8px 20px',
                       background: "var(--bg-secondary)",
                       color: "var(--text-primary)",
                     }}
@@ -265,8 +274,9 @@ export default function HomePage() {
                     🔼 {t("collapseMap")}
                   </button>
                   <div
-                    className="inline-flex text-xs px-3 py-1.5 rounded-full font-medium"
+                    className="inline-flex text-xs rounded-full font-medium"
                     style={{
+                      padding: '6px 16px',
                       background: isDark ? "rgba(0,212,255,0.1)" : "rgba(245,166,35,0.1)",
                       color: isDark ? "#00D4FF" : "#F5A623",
                       border: `1px solid ${isDark ? "rgba(0,212,255,0.3)" : "rgba(245,166,35,0.3)"}`,

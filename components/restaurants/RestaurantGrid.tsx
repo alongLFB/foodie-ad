@@ -21,7 +21,10 @@ export default function RestaurantGrid({
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
+      <div 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10"
+        style={{ gap: '32px' }}
+      >
         {Array.from({ length: 6 }).map((_, i) => (
           <motion.div
             key={i}
@@ -42,6 +45,7 @@ export default function RestaurantGrid({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col items-center justify-center py-20 gap-4"
+        style={{ padding: '80px 0', gap: '16px' }}
       >
         <span className="text-6xl">😭</span>
         <p className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
@@ -59,6 +63,7 @@ export default function RestaurantGrid({
       <motion.div
         layout
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10"
+        style={{ gap: '32px' }}
       >
         <AnimatePresence mode="popLayout">
           {restaurants.map((restaurant, index) => (

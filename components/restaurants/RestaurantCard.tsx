@@ -52,8 +52,10 @@ export function RestaurantCard({
       onHoverEnd={() => setIsHovered(false)}
       onClick={() => setIsModalOpen(true)}
     >
-      {/* Image section */}
-      <div className="relative h-64 overflow-hidden">
+      <div 
+        className="relative h-64 overflow-hidden" 
+        style={{ margin: '16px 16px 0 16px', borderRadius: '20px' }}
+      >
         {!imgLoaded && (
           <div className="absolute inset-0 skeleton flex items-center justify-center">
             <span className="fun-loader-chopsticks text-3xl opacity-40">🥢</span>
@@ -114,7 +116,7 @@ export function RestaurantCard({
       {/* Content Area Container */}
       <div 
         className="flex flex-col relative" 
-        style={{ padding: '24px 20px', gap: '12px' }}
+        style={{ padding: '16px 20px 24px 20px', gap: '12px' }}
       >
         <h3
           className="font-bold text-2xl line-clamp-1"
@@ -154,8 +156,9 @@ export function RestaurantCard({
           {/* Share button */}
           <motion.button
             onClick={handleShare}
-            className="text-xs px-4 py-2 rounded-full font-bold shadow-sm z-10 shrink-0"
+            className="text-xs rounded-full font-bold shadow-sm z-10 shrink-0"
             style={{
+              padding: '8px 16px',
               background: "linear-gradient(135deg, #25D366, #128C7E)",
               color: "white",
             }}
@@ -168,12 +171,21 @@ export function RestaurantCard({
 
         {/* Vibe tags */}
         {restaurant.vibes.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2 pt-3" style={{ borderTop: "1px dashed var(--border-color)" }}>
+          <div 
+            className="flex flex-wrap" 
+            style={{ 
+              borderTop: "1px dashed var(--border-color)", 
+              marginTop: '16px', 
+              paddingTop: '16px', 
+              gap: '8px' 
+            }}
+          >
             {restaurant.vibes.slice(0, 3).map((vibe) => (
               <span
                 key={vibe}
-                className="text-xs font-medium px-3 py-1 rounded-full"
+                className="text-xs font-medium rounded-full"
                 style={{
+                  padding: '6px 14px',
                   background: "var(--bg-secondary)",
                   color: "var(--text-muted)",
                   border: "1px solid var(--border-color)"
