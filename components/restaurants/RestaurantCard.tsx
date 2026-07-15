@@ -70,7 +70,7 @@ export function RestaurantCard({
         />
 
         {/* Category badge */}
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-3 left-3 m-1 z-10">
           <motion.div
             className="px-3 py-1.5 rounded-full text-sm font-bold shadow-lg"
             style={{
@@ -86,7 +86,7 @@ export function RestaurantCard({
         {/* Avoid badge */}
         {isAvoid && (
           <motion.div
-            className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-black shadow-lg"
+            className="absolute top-3 right-3 m-1 z-10 px-3 py-1.5 rounded-full text-xs font-black shadow-lg"
             style={{ background: "#E74C3C", color: "white" }}
             animate={{ rotate: [-2, 2, -2] }}
             transition={{ duration: 1, repeat: Infinity }}
@@ -96,7 +96,7 @@ export function RestaurantCard({
         )}
 
         {/* Rating overlay */}
-        <div className="absolute bottom-4 right-4">
+        <div className="absolute bottom-3 right-3 m-1 z-10">
           <div
             className="px-3 py-1.5 rounded-lg text-base font-black shadow-lg"
             style={{
@@ -111,10 +111,10 @@ export function RestaurantCard({
         </div>
       </div>
 
-      {/* Content */}
-      <div className="px-6 pt-6 pb-8 flex flex-col min-h-0 relative">
+      {/* Content Area Container */}
+      <div className="p-5 pb-6 flex flex-col gap-3 relative">
         <h3
-          className="font-bold text-2xl mb-3 line-clamp-1"
+          className="font-bold text-2xl line-clamp-1"
           style={{ color: "var(--text-primary)" }}
         >
           {name}
@@ -122,7 +122,7 @@ export function RestaurantCard({
 
         {/* Funny Quote */}
         <div
-          className="text-sm italic mb-4 line-clamp-2 rounded-xl p-3"
+          className="text-sm italic line-clamp-2 rounded-r-md pl-3 py-1"
           style={{
             background: "rgba(245, 166, 35, 0.08)",
             color: "var(--text-secondary)",
@@ -133,27 +133,25 @@ export function RestaurantCard({
         </div>
 
         {/* Meta row */}
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-4">
+        <div className="flex justify-between items-center w-full mt-1">
+          <div className="flex items-center gap-3">
             {/* Price */}
             <span
-              className={`text-sm font-semibold price-${restaurant.priceLevel}`}
+              className={`text-sm font-bold price-${restaurant.priceLevel}`}
             >
               {PRICE_LABELS[restaurant.priceLevel]}
             </span>
 
             {/* Funny score */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-medium" style={{ color: "var(--text-muted)" }}>
-                😂×{restaurant.funnyScore}
-              </span>
-            </div>
+            <span className="text-sm font-medium" style={{ color: "var(--text-muted)" }}>
+              😂×{restaurant.funnyScore}
+            </span>
           </div>
 
           {/* Share button */}
           <motion.button
             onClick={handleShare}
-            className="text-xs px-4 py-2 rounded-full font-bold shadow-md"
+            className="text-xs px-4 py-2 rounded-full font-bold shadow-sm z-10 shrink-0"
             style={{
               background: "linear-gradient(135deg, #25D366, #128C7E)",
               color: "white",
@@ -167,7 +165,7 @@ export function RestaurantCard({
 
         {/* Vibe tags */}
         {restaurant.vibes.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4 pt-4" style={{ borderTop: "1px dashed var(--border-color)" }}>
+          <div className="flex flex-wrap gap-2 mt-2 pt-3" style={{ borderTop: "1px dashed var(--border-color)" }}>
             {restaurant.vibes.slice(0, 3).map((vibe) => (
               <span
                 key={vibe}

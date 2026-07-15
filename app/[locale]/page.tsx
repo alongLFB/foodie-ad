@@ -61,8 +61,8 @@ export default function HomePage() {
 
       {/* ─── HERO SECTION ─────────────────────────────────── */}
       <section className="hero-section noise-overlay text-center relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 relative z-10 flex flex-col items-center">
-          <div className="max-w-3xl mx-auto flex flex-col items-center">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 pt-40 pb-32 relative z-10 flex flex-col items-center">
+          <div className="max-w-5xl mx-auto flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,10 +140,14 @@ export default function HomePage() {
               {/* Secondary CTA: Food Map */}
               <button
                 onClick={() => {
-                  setShowMap(true);
-                  setTimeout(() => {
+                  if (showMap) {
                     document.getElementById("map-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                  }, 100);
+                  } else {
+                    setShowMap(true);
+                    setTimeout(() => {
+                      document.getElementById("map-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }, 100);
+                  }
                 }}
                 className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-lg flex justify-center items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 border-2"
                 style={{
@@ -185,7 +189,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── STATS BAR ────────────────────────────────────── */}
       <section
         style={{
           background: isDark
@@ -194,7 +197,7 @@ export default function HomePage() {
           padding: "32px 0",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
             {STATS.map((stat, i) => (
               <motion.div
@@ -234,7 +237,7 @@ export default function HomePage() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">🗺️</span>
@@ -250,15 +253,27 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-                <div
-                  className="inline-flex text-xs px-3 py-1.5 rounded-full font-medium"
-                  style={{
-                    background: isDark ? "rgba(0,212,255,0.1)" : "rgba(245,166,35,0.1)",
-                    color: isDark ? "#00D4FF" : "#F5A623",
-                    border: `1px solid ${isDark ? "rgba(0,212,255,0.3)" : "rgba(245,166,35,0.3)"}`,
-                  }}
-                >
-                  {isDark ? t("mapCyberpunk") : t("mapResort")}
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => setShowMap(false)}
+                    className="text-sm px-4 py-1.5 rounded-full font-bold shadow-sm border border-[var(--border-color)] transition-all hover:scale-105 active:scale-95"
+                    style={{
+                      background: "var(--bg-secondary)",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    🔼 {locale === "zh" ? "收起地图" : "Collapse"}
+                  </button>
+                  <div
+                    className="inline-flex text-xs px-3 py-1.5 rounded-full font-medium"
+                    style={{
+                      background: isDark ? "rgba(0,212,255,0.1)" : "rgba(245,166,35,0.1)",
+                      color: isDark ? "#00D4FF" : "#F5A623",
+                      border: `1px solid ${isDark ? "rgba(0,212,255,0.3)" : "rgba(245,166,35,0.3)"}`,
+                    }}
+                  >
+                    {isDark ? t("mapCyberpunk") : t("mapResort")}
+                  </div>
                 </div>
               </div>
               <FoodieMap restaurants={allRestaurants} />
@@ -267,10 +282,9 @@ export default function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* ─── RESTAURANT SECTION ───────────────────────────── */}
       <section
         id="restaurant-section"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
+        className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-12 py-16 sm:py-24"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -315,7 +329,7 @@ export default function HomePage() {
           background: "var(--bg-secondary)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             className="text-4xl mb-4"
             animate={{ rotate: [0, 15, -15, 0] }}
