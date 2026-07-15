@@ -9,9 +9,12 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [langZh, setLangZh] = useState(false);
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const [mounted, setMounted] = useState(false);
+
+  const isDark = mounted ? resolvedTheme === "dark" : false;
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import NavBar from "@/components/ui/NavBar";
@@ -41,7 +41,13 @@ export default function HomePage() {
   const [langZh, setLangZh] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : false;
 
   const allRestaurants = getApprovedRestaurants();
   const filteredRestaurants = useMemo(

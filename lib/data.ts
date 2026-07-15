@@ -44,9 +44,9 @@ export const mockRestaurants: Restaurant[] = [
     lng: 54.3578,
     rating: 4.8,
     funnyScore: 4,
-    coverImage: 'https://images.unsplash.com/photo-1561050501-a3f0f984c3a1?w=800&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
     images: [
-      'https://images.unsplash.com/photo-1561050501-a3f0f984c3a1?w=800&q=80',
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
     ],
     funnyQuote: 'Scientists have yet to explain why shawarma tastes 300% better after midnight.',
     funnyQuoteZh: '科学家们至今无法解释为何沙瓦尔马在午夜之后会美味300%。',
@@ -188,9 +188,9 @@ export const mockRestaurants: Restaurant[] = [
     lng: 54.3790,
     rating: 4.3,
     funnyScore: 3,
-    coverImage: 'https://images.unsplash.com/photo-1562565651-2b3cb2af38e1?w=800&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=800&q=80',
     images: [
-      'https://images.unsplash.com/photo-1562565651-2b3cb2af38e1?w=800&q=80',
+      'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=800&q=80',
     ],
     funnyQuote: 'The tom yum soup is 90% broth, 10% therapy session.',
     funnyQuoteZh: '冬荫功汤里90%是汤底，10%是心理治疗。',
