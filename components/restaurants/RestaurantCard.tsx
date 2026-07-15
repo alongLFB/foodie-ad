@@ -70,7 +70,7 @@ export function RestaurantCard({
         />
 
         {/* Category badge */}
-        <div className="absolute top-3 left-3 m-1 z-10">
+        <div className="absolute z-10" style={{ top: '16px', left: '16px' }}>
           <motion.div
             className="px-3 py-1.5 rounded-full text-sm font-bold shadow-lg"
             style={{
@@ -86,8 +86,8 @@ export function RestaurantCard({
         {/* Avoid badge */}
         {isAvoid && (
           <motion.div
-            className="absolute top-3 right-3 m-1 z-10 px-3 py-1.5 rounded-full text-xs font-black shadow-lg"
-            style={{ background: "#E74C3C", color: "white" }}
+            className="absolute z-10 px-3 py-1.5 rounded-full text-xs font-black shadow-lg"
+            style={{ top: '16px', right: '16px', background: "#E74C3C", color: "white" }}
             animate={{ rotate: [-2, 2, -2] }}
             transition={{ duration: 1, repeat: Infinity }}
           >
@@ -96,7 +96,7 @@ export function RestaurantCard({
         )}
 
         {/* Rating overlay */}
-        <div className="absolute bottom-3 right-3 m-1 z-10">
+        <div className="absolute z-10" style={{ bottom: '16px', right: '16px' }}>
           <div
             className="px-3 py-1.5 rounded-lg text-base font-black shadow-lg"
             style={{
@@ -112,7 +112,10 @@ export function RestaurantCard({
       </div>
 
       {/* Content Area Container */}
-      <div className="p-5 pb-6 flex flex-col gap-3 relative">
+      <div 
+        className="flex flex-col relative" 
+        style={{ padding: '24px 20px', gap: '12px' }}
+      >
         <h3
           className="font-bold text-2xl line-clamp-1"
           style={{ color: "var(--text-primary)" }}
