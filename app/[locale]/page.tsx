@@ -70,8 +70,9 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold"
               style={{
+                marginBottom: '32px',
                 background: isDark
                   ? "rgba(0,212,255,0.1)"
                   : "rgba(245,166,35,0.12)",
@@ -92,8 +93,8 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6"
-              style={{ color: "var(--text-primary)" }}
+              className="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight"
+              style={{ color: "var(--text-primary)", marginBottom: '24px' }}
             >
               {t("heroTitle1")}
               <br />
@@ -113,8 +114,8 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg sm:text-xl mb-10 max-w-2xl leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
+              className="text-lg sm:text-xl max-w-2xl leading-relaxed"
+              style={{ color: "var(--text-secondary)", marginBottom: '40px' }}
             >
               {t("heroDesc")}
             </motion.p>
@@ -123,7 +124,8 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-6 mt-12 pt-4 w-full justify-center"
+              className="flex flex-col sm:flex-row w-full justify-center"
+              style={{ marginTop: '48px', paddingTop: '16px', gap: '24px' }}
             >
               {/* Primary CTA: Explore Food */}
               <button
