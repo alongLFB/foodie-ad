@@ -47,7 +47,10 @@ export default function NavBar() {
         borderBottom: scrolled ? `1px solid var(--border-color)` : "none",
       }}
     >
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
+      <div 
+        className="w-full max-w-[1600px] mx-auto"
+        style={{ padding: '0 40px' }}
+      >
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div

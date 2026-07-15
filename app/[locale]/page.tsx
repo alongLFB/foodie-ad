@@ -61,7 +61,10 @@ export default function HomePage() {
 
       {/* ─── HERO SECTION ─────────────────────────────────── */}
       <section className="hero-section noise-overlay text-center relative overflow-hidden">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 pt-40 pb-32 relative z-10 flex flex-col items-center">
+        <div 
+          className="w-full max-w-[1600px] mx-auto pt-40 pb-32 relative z-10 flex flex-col items-center"
+          style={{ paddingLeft: '40px', paddingRight: '40px' }}
+        >
           <div className="max-w-5xl mx-auto flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -202,7 +205,10 @@ export default function HomePage() {
           padding: "32px 0",
         }}
       >
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div 
+          className="w-full max-w-[1600px] mx-auto"
+          style={{ paddingLeft: '40px', paddingRight: '40px' }}
+        >
           <div 
             className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8"
             style={{ gap: '32px' }}
@@ -245,7 +251,10 @@ export default function HomePage() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-10">
+            <div 
+              className="w-full max-w-[1600px] mx-auto py-10"
+              style={{ paddingLeft: '40px', paddingRight: '40px' }}
+            >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <span className="text-4xl">🗺️</span>
@@ -294,7 +303,8 @@ export default function HomePage() {
 
       <section
         id="restaurant-section"
-        className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-12 py-16 sm:py-24"
+        className="w-full max-w-[1600px] mx-auto py-16 sm:py-24"
+        style={{ paddingLeft: '40px', paddingRight: '40px' }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -342,7 +352,10 @@ export default function HomePage() {
           background: "var(--bg-secondary)",
         }}
       >
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div 
+          className="w-full max-w-[1600px] mx-auto"
+          style={{ paddingLeft: '40px', paddingRight: '40px' }}
+        >
           <motion.div
             className="text-4xl mb-4"
             animate={{ rotate: [0, 15, -15, 0] }}
