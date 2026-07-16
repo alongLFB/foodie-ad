@@ -24,6 +24,13 @@ export const ugcSubmissionSchema = z.object({
     .number()
     .min(1, '评分至少1分')
     .max(5, '最高5分'),
+  priceRange: z.enum(['low', 'medium', 'high', 'luxury'] as const, {
+    message: '请选择人均消费 / Select a price range'
+  }),
+  parking: z.enum(['easy', 'hard', 'mall', 'valet'] as const, {
+    message: '请选择停车情况 / Select parking situation'
+  }),
+  mustOrder: z.string().max(100, '必点菜名字太长啦 / Must-order text too long').optional(),
   submitterName: z.string().max(50).optional(),
 });
 

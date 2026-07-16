@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ugcSubmissionSchema, UGCSubmissionSchema } from "@/lib/validations";
-import { VIBE_OPTIONS, CATEGORY_EMOJI, FoodCategory } from "@/types";
+import { VIBE_OPTIONS, CATEGORY_EMOJI, FoodCategory, PRICE_OPTIONS, PARKING_OPTIONS } from "@/types";
 import { useDropzone } from "react-dropzone";
 
 interface SubmitFormProps {
@@ -56,6 +56,9 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       vibes: [],
       funnyScore: 3,
       category: undefined,
+      priceRange: undefined,
+      parking: undefined,
+      mustOrder: "",
     },
   });
 
@@ -247,23 +250,79 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         </div>
       </div>
 
-      {/* Category */}
+      {/* Category, Price, Parking Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+        {/* Category */}
+        <div>
+          <label className="form-label">
+            {t("categoryLabel")}
+          </label>
+          <select
+            {...register("category")}
+            className={`form-input ${errors.category ? "error" : ""}`}
+          >
+            <option value="">{t("categorySelect")}</option>
+            {CATEGORIES.map((c) => (
+              <option key={c.value} value={c.value}>
+                {CATEGORY_EMOJI[c.value]} {t(`cat_${c.value}` as any)}
+              </option>
+            ))}
+          </select>
+          {errors.category && <p className="form-error">{errors.category.message}</p>}
+        </div>
+
+        {/* Price Range */}
+        <div>
+          <label className="form-label">
+            {t("priceLabel")}
+          </label>
+          <select
+            {...register("priceRange")}
+            className={`form-input ${errors.priceRange ? "error" : ""}`}
+          >
+            <option value="">{t("priceSelect")}</option>
+            {PRICE_OPTIONS.map((p) => (
+              <option key={p.value} value={p.value}>
+                {locale === "zh" ? p.labelZh : p.labelEn}
+              </option>
+            ))}
+          </select>
+          {errors.priceRange && <p className="form-error">{errors.priceRange.message}</p>}
+        </div>
+
+        {/* Parking */}
+        <div>
+          <label className="form-label">
+            {t("parkingLabel")}
+          </label>
+          <select
+            {...register("parking")}
+            className={`form-input ${errors.parking ? "error" : ""}`}
+          >
+            <option value="">{t("parkingSelect")}</option>
+            {PARKING_OPTIONS.map((p) => (
+              <option key={p.value} value={p.value}>
+                {locale === "zh" ? p.labelZh : p.labelEn}
+              </option>
+            ))}
+          </select>
+          {errors.parking && <p className="form-error">{errors.parking.message}</p>}
+        </div>
+      </div>
+
+      {/* Must Order */}
       <div>
         <label className="form-label">
-          {t("categoryLabel")}
+          {t("mustOrderLabel")}
         </label>
-        <select
-          {...register("category")}
-          className={`form-input ${errors.category ? "error" : ""}`}
-        >
-          <option value="">{t("categorySelect")}</option>
-          {CATEGORIES.map((c) => (
-            <option key={c.value} value={c.value}>
-              {CATEGORY_EMOJI[c.value]} {t(`cat_${c.value}` as any)}
-            </option>
-          ))}
-        </select>
-        {errors.category && <p className="form-error">{errors.category.message}</p>}
+        <input
+          {...register("mustOrder")}
+          className={`form-input ${errors.mustOrder ? "error" : ""}`}
+          placeholder={t("mustOrderPlaceholder")}
+        />
+        {errors.mustOrder && (
+          <p className="form-error">{errors.mustOrder.message}</p>
+        )}
       </div>
 
       {/* Vibe Tags */}

@@ -118,3 +118,21 @@ export const VIBE_OPTIONS: VibeFilterOption[] = [
   { id: 'alone-time', emoji: '🎧', labelEn: 'Solo Dining Friendly', labelZh: '社恐一人食不尴尬' },
   { id: 'gym-rat', emoji: '💪', labelEn: 'Post-Workout Protein', labelZh: '撸铁后高蛋白狂揽' },
 ];
+
+export type PriceRange = 'low' | 'medium' | 'high' | 'luxury';
+export type ParkingStatus = 'easy' | 'hard' | 'mall' | 'valet';
+
+export const PRICE_OPTIONS: { value: PriceRange; labelEn: string; labelZh: string }[] = [
+  { value: 'low', labelEn: '💰 <50 AED (Budget)', labelZh: '💰 <50 AED (平价)' },
+  { value: 'medium', labelEn: '💰💰 50-150 AED (Mid)', labelZh: '💰💰 50-150 AED (中档)' },
+  { value: 'high', labelEn: '💰💰💰 150-300 AED (Pricey)', labelZh: '💰💰💰 150-300 AED (小贵)' },
+  { value: 'luxury', labelEn: '💰💰💰💰 300+ AED (Luxury)', labelZh: '💰💰💰💰 300+ AED (豪华)' },
+];
+
+export const PARKING_OPTIONS: { value: ParkingStatus; labelEn: string; labelZh: string }[] = [
+  { value: 'easy', labelEn: 'Easy Street Parking', labelZh: '街边好停车' },
+  { value: 'hard', labelEn: 'Hard to Park', labelZh: '车位难寻' },
+  { value: 'mall', labelEn: 'Mall Parking', labelZh: '商场停车' },
+  { value: 'valet', labelEn: 'Valet Available', labelZh: '有代客泊车' },
+];
+
