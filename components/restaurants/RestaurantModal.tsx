@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
-import { Restaurant, CATEGORY_EMOJI, PRICE_OPTIONS, PARKING_OPTIONS } from "@/types";
+import { Restaurant, CATEGORY_EMOJI, PRICE_OPTIONS, PARKING_OPTIONS, VIBE_OPTIONS } from "@/types";
 import { useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import * as htmlToImage from "html-to-image";
@@ -14,7 +14,8 @@ interface RestaurantModalProps {
   onClose: () => void;
 }
 
-const PRICE_LABELS = ["", "💰 Budget", "💰💰 Mid", "💰💰💰 Pricey", "💰💰💰💰 Splurge"];
+const PRICE_LABELS_EN = ["", "💰 Budget", "💰💰 Mid", "💰💰💰 Pricey", "💰💰💰💰 Splurge"];
+const PRICE_LABELS_ZH = ["", "💰 平价", "💰💰 中档", "💰💰💰 小贵", "💰💰💰💰 豪华"];
 
 export default function RestaurantModal({ restaurant, isOpen, onClose }: RestaurantModalProps) {
   const t = useTranslations("Card");
@@ -35,7 +36,8 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
   const desc = locale === "zh" && restaurant.descriptionZh ? restaurant.descriptionZh : restaurant.description;
 
   const priceObj = PRICE_OPTIONS.find(p => p.value === restaurant.priceRange);
-  const priceDisplay = priceObj ? (locale === "zh" ? priceObj.labelZh : priceObj.labelEn) : PRICE_LABELS[restaurant.priceLevel];
+  const fallbackPrice = locale === "zh" ? PRICE_LABELS_ZH[restaurant.priceLevel] : PRICE_LABELS_EN[restaurant.priceLevel];
+  const priceDisplay = priceObj ? (locale === "zh" ? priceObj.labelZh : priceObj.labelEn) : fallbackPrice;
 
   const parkingObj = PARKING_OPTIONS.find(p => p.value === restaurant.parking);
   const parkingDisplay = parkingObj ? (locale === "zh" ? parkingObj.labelZh : parkingObj.labelEn) : null;
@@ -173,6 +175,30 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                   {desc}
                 </p>
                 
+                {/* Vibes */}
+                {restaurant.vibes.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {restaurant.vibes.map((vibe) => {
+                      const vObj = VIBE_OPTIONS.find(v => v.id === vibe);
+                      const vText = vObj ? (locale === "zh" ? `${vObj.emoji} ${vObj.labelZh}` : `${vObj.emoji} ${vObj.labelEn}`) : vibe.replace(/-/g, " ");
+                      return (
+                        <span
+                          key={vibe}
+                          className="text-xs font-medium rounded-full"
+                          style={{
+                            padding: '6px 14px',
+                            background: "var(--bg-secondary)",
+                            color: "var(--text-muted)",
+                            border: "1px solid var(--border-color)"
+                          }}
+                        >
+                          {vText}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+                
                 {restaurant.mustOrder && (
                   <div className="bg-[rgba(245,166,35,0.1)] border-l-4 border-[#F5A623] rounded-r-2xl p-4 mt-6 text-[var(--text-primary)]">
                     <span className="font-bold block mb-1">🔥 {locale === "zh" ? "必点推荐 / Must Order:" : "Must Order:"}</span>
@@ -203,6 +229,12 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                     <div className="flex items-start gap-3">
                       <span className="shrink-0 mt-0.5">🚗</span>
                       <span>{parkingDisplay}</span>
+                    </div>
+                  )}
+                  {restaurant.submittedBy && (
+                    <div className="flex items-start gap-3 pt-2 border-t border-[var(--border-color)]">
+                      <span className="shrink-0 mt-0.5">👤</span>
+                      <span className="italic text-sm">{locale === "zh" ? "爆料人：" : "Submitted by: "} {restaurant.submittedBy}</span>
                     </div>
                   )}
                 </div>

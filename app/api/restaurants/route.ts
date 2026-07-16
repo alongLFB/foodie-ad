@@ -18,6 +18,9 @@ export async function GET(request: NextRequest) {
         supabaseRestaurants = data.map((item) => ({
           ...item,
           funnyScore: item.funny_score,
+          priceRange: item.price_range,
+          mustOrder: item.must_order,
+          parking: item.parking,
           submittedBy: item.submitted_by,
           createdAt: item.created_at,
           coverImage: item.cover_image || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",

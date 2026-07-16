@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { Restaurant, CATEGORY_EMOJI, VIBE_OPTIONS } from "@/types";
+import { Restaurant, CATEGORY_EMOJI, VIBE_OPTIONS, PRICE_OPTIONS, PARKING_OPTIONS } from "@/types";
 import RestaurantModal from "./RestaurantModal";
 
 interface RestaurantCardProps {
@@ -12,7 +12,8 @@ interface RestaurantCardProps {
   index?: number;
 }
 
-const PRICE_LABELS = ["", "💰 Budget", "💰💰 Mid", "💰💰💰 Pricey", "💰💰💰💰 Splurge"];
+const PRICE_LABELS_EN = ["", "💰 Budget", "💰💰 Mid", "💰💰💰 Pricey", "💰💰💰💰 Splurge"];
+const PRICE_LABELS_ZH = ["", "💰 平价", "💰💰 中档", "💰💰💰 小贵", "💰💰💰💰 豪华"];
 
 export function RestaurantCard({
   restaurant,
@@ -27,6 +28,13 @@ export function RestaurantCard({
 
   const name = locale === "zh" && restaurant.nameZh ? restaurant.nameZh : restaurant.name;
   const quote = locale === "zh" && restaurant.funnyQuoteZh ? restaurant.funnyQuoteZh : restaurant.funnyQuote;
+
+  const priceObj = PRICE_OPTIONS.find(p => p.value === restaurant.priceRange);
+  const fallbackPrice = locale === "zh" ? PRICE_LABELS_ZH[restaurant.priceLevel] : PRICE_LABELS_EN[restaurant.priceLevel];
+  const priceDisplay = priceObj ? (locale === "zh" ? priceObj.labelZh : priceObj.labelEn) : fallbackPrice;
+
+  const parkingObj = PARKING_OPTIONS.find(p => p.value === restaurant.parking);
+  const parkingDisplay = parkingObj ? (locale === "zh" ? parkingObj.labelZh : parkingObj.labelEn) : null;
 
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -142,6 +150,20 @@ export function RestaurantCard({
           )}
         </div>
 
+        {/* Address & Parking (New key info) */}
+        <div className="flex flex-col gap-1.5 mb-2">
+          <div className="flex items-center gap-1.5 text-[13px] text-[var(--text-muted)]">
+            <span className="shrink-0">📍</span>
+            <span className="line-clamp-1">{restaurant.address}</span>
+          </div>
+          {parkingDisplay && (
+            <div className="flex items-center gap-1.5 text-[13px] text-[var(--text-muted)]">
+              <span className="shrink-0">🚗</span>
+              <span className="line-clamp-1">{parkingDisplay}</span>
+            </div>
+          )}
+        </div>
+
         {/* Funny Quote */}
         <div
           className="text-sm italic line-clamp-2 rounded-r-md pl-3 py-1"
@@ -161,7 +183,7 @@ export function RestaurantCard({
             <span
               className={`text-sm font-bold price-${restaurant.priceLevel}`}
             >
-              {PRICE_LABELS[restaurant.priceLevel]}
+              {priceDisplay}
             </span>
 
             {/* Funny score */}

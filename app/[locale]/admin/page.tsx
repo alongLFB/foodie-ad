@@ -39,7 +39,16 @@ export default function AdminPage() {
       console.error(error);
       alert(t("fetchError"));
     } else {
-      setPendingItems(data as any);
+      const mapped = (data || []).map((item) => ({
+        ...item,
+        funnyScore: item.funny_score,
+        priceRange: item.price_range,
+        mustOrder: item.must_order,
+        parking: item.parking,
+        submittedBy: item.submitted_by,
+        createdAt: item.created_at,
+      }));
+      setPendingItems(mapped as any);
     }
     setLoading(false);
   };
