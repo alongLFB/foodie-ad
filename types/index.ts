@@ -12,7 +12,13 @@ export type VibeTag =
   | 'quick-bite'
   | 'health-freak'
   | 'business-flex'
-  | 'spicy-challenge';
+  | 'spicy-challenge'
+  | 'date-night'
+  | 'brunch-vibes'
+  | 'sweet-tooth'
+  | 'karak-time'
+  | 'alone-time'
+  | 'gym-rat';
 
 export type FoodCategory =
   | 'chinese'
@@ -105,4 +111,10 @@ export const VIBE_OPTIONS: VibeFilterOption[] = [
   { id: 'health-freak', emoji: '🌿', labelEn: 'Salad Therapy', labelZh: '吃草减肥系列' },
   { id: 'business-flex', emoji: '💼', labelEn: 'Business Flex', labelZh: '商务请客撑场面' },
   { id: 'spicy-challenge', emoji: '🔥', labelEn: 'Spicy Challenge', labelZh: '辣到飞起挑战赛' },
+  { id: 'date-night', emoji: '🥂', labelEn: 'Date Night Flex', labelZh: '约会装杯首选' },
+  { id: 'brunch-vibes', emoji: '🍳', labelEn: 'Lazy Weekend Brunch', labelZh: '周末慵懒早午餐' },
+  { id: 'sweet-tooth', emoji: '🍰', labelEn: 'Sweet Tooth Heaven', labelZh: '甜品脑袋狂喜' },
+  { id: 'karak-time', emoji: '🫖', labelEn: 'Karak & Vibes', labelZh: 'Karak奶茶配大饼' },
+  { id: 'alone-time', emoji: '🎧', labelEn: 'Solo Dining Friendly', labelZh: '社恐一人食不尴尬' },
+  { id: 'gym-rat', emoji: '💪', labelEn: 'Post-Workout Protein', labelZh: '撸铁后高蛋白狂揽' },
 ];
