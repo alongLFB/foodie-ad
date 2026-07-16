@@ -81,17 +81,19 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
   const onSubmit = async (data: UGCSubmissionSchema) => {
     setStatus("submitting");
     try {
-      // Simulate API call — replace with actual Supabase call
-      await new Promise((res) => setTimeout(res, 1800));
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-      // In production: POST to /api/submit with FormData
-      // const formData = new FormData();
-      // Object.entries(data).forEach(([k, v]) => formData.append(k, JSON.stringify(v)));
-      // if (imageFile) formData.append('image', imageFile);
-      // await fetch('/api/submit', { method: 'POST', body: formData });
+      if (!res.ok) {
+        throw new Error("Failed to submit");
+      }
 
       setStatus("success");
-    } catch {
+    } catch (err) {
+      console.error(err);
       setStatus("error");
     }
   };

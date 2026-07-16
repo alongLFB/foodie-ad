@@ -1,53 +1,43 @@
 import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
+    const data = await req.json();
 
-    // Validate required fields
-    if (!body.name || !body.description || !body.address) {
+    if (!supabase) {
       return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
+        { error: "Supabase not configured" },
+        { status: 500 }
       );
     }
 
-    // Submission data structure (ready for Supabase)
-    const submission = {
-      name: body.name,
-      name_zh: body.nameZh || null,
-      description: body.description,
-      address: body.address,
-      area: body.area,
-      category: body.category,
-      vibes: body.vibes || [],
-      funny_score: body.funnyScore || 3,
-      submitted_by: body.submitterName || "Anonymous Foodie",
-      status: "pending" as const,
-      created_at: new Date().toISOString(),
-    };
+    // Insert into restaurants table with status 'pending'
+    const { error } = await supabase.from("restaurants").insert([
+      {
+        name: data.name,
+        description: data.description,
+        address: data.address,
+        area: data.area,
+        category: data.category,
+        vibes: data.vibes || [],
+        funny_score: data.funnyScore,
+        submitted_by: data.submitterName || "Anonymous",
+        status: "pending",
+      },
+    ]);
 
-    // TODO: Save to Supabase when configured
-    // const { supabase, isSupabaseConfigured } = await import('@/lib/supabase');
-    // if (isSupabaseConfigured() && supabase) {
-    //   const { data, error } = await supabase
-    //     .from('restaurants')
-    //     .insert([submission]);
-    //   if (error) throw error;
-    // }
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return NextResponse.json(
+        { error: "Failed to submit to database" },
+        { status: 500 }
+      );
+    }
 
-    console.log("[UGC Submission]", submission);
-
-    return NextResponse.json({
-      success: true,
-      message: "Submission received! Admin is reviewing on an empty stomach 🍽️",
-      id: crypto.randomUUID(),
-    });
-  } catch (error) {
-    console.error("[UGC Submit Error]", error);
-    return NextResponse.json(
-      { error: "Submission failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Submit API error:", err);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
