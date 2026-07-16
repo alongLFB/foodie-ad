@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
-import { Restaurant, CATEGORY_EMOJI } from "@/types";
+import { Restaurant, CATEGORY_EMOJI, PRICE_OPTIONS, PARKING_OPTIONS } from "@/types";
 import { useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import * as htmlToImage from "html-to-image";
@@ -33,6 +33,12 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
   const name = locale === "zh" && restaurant.nameZh ? restaurant.nameZh : restaurant.name;
   const quote = locale === "zh" && restaurant.funnyQuoteZh ? restaurant.funnyQuoteZh : restaurant.funnyQuote;
   const desc = locale === "zh" && restaurant.descriptionZh ? restaurant.descriptionZh : restaurant.description;
+
+  const priceObj = PRICE_OPTIONS.find(p => p.value === restaurant.priceRange);
+  const priceDisplay = priceObj ? (locale === "zh" ? priceObj.labelZh : priceObj.labelEn) : PRICE_LABELS[restaurant.priceLevel];
+
+  const parkingObj = PARKING_OPTIONS.find(p => p.value === restaurant.parking);
+  const parkingDisplay = parkingObj ? (locale === "zh" ? parkingObj.labelZh : parkingObj.labelEn) : null;
 
   const handleShare = async () => {
     if (!posterRef.current) return;
@@ -156,9 +162,9 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
 
               <div className="flex items-center gap-6 mb-8 pb-8 border-b border-[var(--border-color)] text-[var(--text-secondary)]">
                 <span className={`font-semibold price-${restaurant.priceLevel}`}>
-                  {PRICE_LABELS[restaurant.priceLevel]}
+                  {priceDisplay}
                 </span>
-                <span className="font-medium">😂 毒舌指数 ×{restaurant.funnyScore}</span>
+                <span className="font-medium">😂 {locale === "zh" ? "毒舌指数" : "Funny Score"} ×{restaurant.funnyScore}</span>
               </div>
 
               {/* Info section */}
@@ -167,21 +173,38 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                   {desc}
                 </p>
                 
+                {restaurant.mustOrder && (
+                  <div className="bg-[rgba(245,166,35,0.1)] border-l-4 border-[#F5A623] rounded-r-2xl p-4 mt-6 text-[var(--text-primary)]">
+                    <span className="font-bold block mb-1">🔥 {locale === "zh" ? "必点推荐 / Must Order:" : "Must Order:"}</span>
+                    <span className="text-[var(--text-secondary)]">{restaurant.mustOrder}</span>
+                  </div>
+                )}
+                
                 <div className="bg-[var(--bg-secondary)] rounded-2xl p-5 mt-6 space-y-3 text-[var(--text-secondary)]">
-                  <div className="flex items-start gap-3">
-                    <span className="shrink-0 mt-0.5">🕒</span>
-                    <span>{restaurant.hours}</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="shrink-0 mt-0.5">📞</span>
-                    <span>{restaurant.phone}</span>
-                  </div>
+                  {restaurant.hours && (
+                    <div className="flex items-start gap-3">
+                      <span className="shrink-0 mt-0.5">🕒</span>
+                      <span>{restaurant.hours}</span>
+                    </div>
+                  )}
+                  {restaurant.phone && (
+                    <div className="flex items-start gap-3">
+                      <span className="shrink-0 mt-0.5">📞</span>
+                      <span>{restaurant.phone}</span>
+                    </div>
+                  )}
                   <div className="flex items-start gap-3">
                     <span className="shrink-0 mt-0.5">📍</span>
                     <a href={restaurant.googleMapsUrl} target="_blank" rel="noreferrer" className="text-[var(--color-saffron)] hover:underline">
                       {restaurant.address}
                     </a>
                   </div>
+                  {parkingDisplay && (
+                    <div className="flex items-start gap-3">
+                      <span className="shrink-0 mt-0.5">🚗</span>
+                      <span>{parkingDisplay}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -218,7 +241,7 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                     <div className="flex gap-4 items-center text-xl">
                       <span className="text-[#F5A623] font-bold">⭐ {restaurant.rating.toFixed(1)}</span>
                       <span>·</span>
-                      <span>{PRICE_LABELS[restaurant.priceLevel]}</span>
+                      <span>{priceDisplay}</span>
                     </div>
                   </div>
                 </div>
@@ -229,12 +252,26 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                   </div>
                   
                   <div className="grid grid-cols-2 gap-6 text-gray-600 text-lg">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">🕒</span> {restaurant.hours}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">📞</span> {restaurant.phone}
-                    </div>
+                    {restaurant.hours && (
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">🕒</span> {restaurant.hours}
+                      </div>
+                    )}
+                    {restaurant.phone && (
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">📞</span> {restaurant.phone}
+                      </div>
+                    )}
+                    {parkingDisplay && (
+                      <div className="flex items-center gap-3 col-span-2 mt-2">
+                        <span className="text-2xl">🚗</span> {parkingDisplay}
+                      </div>
+                    )}
+                    {restaurant.mustOrder && (
+                      <div className="flex items-center gap-3 col-span-2 mt-2 text-[#F5A623]">
+                        <span className="text-2xl">🔥</span> 必点: {restaurant.mustOrder}
+                      </div>
+                    )}
                     <div className="flex items-center gap-3 col-span-2 mt-2">
                       <span className="text-2xl">📍</span> {restaurant.address}
                     </div>

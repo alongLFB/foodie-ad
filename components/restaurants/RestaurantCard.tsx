@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { Restaurant, CATEGORY_EMOJI } from "@/types";
+import { Restaurant, CATEGORY_EMOJI, VIBE_OPTIONS } from "@/types";
 import RestaurantModal from "./RestaurantModal";
 
 interface RestaurantCardProps {
@@ -197,20 +197,40 @@ export function RestaurantCard({
               gap: '8px' 
             }}
           >
-            {restaurant.vibes.slice(0, 3).map((vibe) => (
-              <span
-                key={vibe}
-                className="text-xs font-medium rounded-full"
-                style={{
-                  padding: '6px 14px',
-                  background: "var(--bg-secondary)",
-                  color: "var(--text-muted)",
-                  border: "1px solid var(--border-color)"
-                }}
-              >
-                {vibe.replace(/-/g, " ")}
-              </span>
-            ))}
+            {restaurant.vibes.slice(0, 3).map((vibe) => {
+              const vObj = VIBE_OPTIONS.find(v => v.id === vibe);
+              const vText = vObj ? (locale === "zh" ? `${vObj.emoji} ${vObj.labelZh}` : `${vObj.emoji} ${vObj.labelEn}`) : vibe.replace(/-/g, " ");
+              return (
+                <span
+                  key={vibe}
+                  className="text-xs font-medium rounded-full"
+                  style={{
+                    padding: '6px 14px',
+                    background: "var(--bg-secondary)",
+                    color: "var(--text-muted)",
+                    border: "1px solid var(--border-color)"
+                  }}
+                >
+                  {vText}
+                </span>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Must Order Highlight */}
+        {restaurant.mustOrder && (
+          <div 
+            className="mt-3 text-sm rounded-lg"
+            style={{
+              padding: '10px 14px',
+              background: 'rgba(245, 166, 35, 0.1)',
+              borderLeft: '4px solid #F5A623',
+              color: 'var(--text-primary)'
+            }}
+          >
+            <span className="font-bold">🔥 {locale === "zh" ? "必点推荐：" : "Must Order: "}</span>
+            {restaurant.mustOrder}
           </div>
         )}
       </div>
