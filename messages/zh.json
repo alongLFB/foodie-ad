@@ -109,5 +109,26 @@
     "cat_cafe": "咖啡/早午餐",
     "cat_dessert": "甜品",
     "cat_fast-food": "快餐"
+  },
+  "AdminPage": {
+    "loginTitle": "管理后台",
+    "loginDesc": "请输入暗号以审核爆料",
+    "passwordPlaceholder": "输入暗号...",
+    "loginBtn": "🚀 进入",
+    "dashboardTitle": "后台审核面板",
+    "refreshBtn": "刷新",
+    "loading": "加载待审核项中...",
+    "empty": "目前没有待审核的爆料！🎉",
+    "by": "爆料人：",
+    "review": "评价：",
+    "address": "地址：",
+    "category": "分类：",
+    "vibes": "氛围：",
+    "funnyScore": "毒舌评分：",
+    "approveBtn": "通过",
+    "rejectBtn": "拒绝",
+    "invalidSecret": "暗号错误",
+    "fetchError": "获取失败",
+    "actionError": "操作失败"
   }
 }

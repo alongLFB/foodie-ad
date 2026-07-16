@@ -109,5 +109,26 @@
     "cat_cafe": "Café/Brunch",
     "cat_dessert": "Desserts",
     "cat_fast-food": "Fast Food"
+  },
+  "AdminPage": {
+    "loginTitle": "Admin Access",
+    "loginDesc": "Please enter the secret phrase to review submissions.",
+    "passwordPlaceholder": "Enter secret...",
+    "loginBtn": "🚀 Authenticate",
+    "dashboardTitle": "Admin Review Dashboard",
+    "refreshBtn": "Refresh",
+    "loading": "Loading pending items...",
+    "empty": "No pending items to review! 🎉",
+    "by": "by",
+    "review": "Review:",
+    "address": "Address:",
+    "category": "Category:",
+    "vibes": "Vibes:",
+    "funnyScore": "Funny Score:",
+    "approveBtn": "Approve",
+    "rejectBtn": "Reject",
+    "invalidSecret": "Invalid secret",
+    "fetchError": "Failed to fetch items",
+    "actionError": "Failed to action item"
   }
 }

@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
 import { Restaurant } from "@/types";
 
 export default function AdminPage() {
+  const t = useTranslations("AdminPage");
   const [secret, setSecret] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [pendingItems, setPendingItems] = useState<Restaurant[]>([]);
@@ -13,11 +16,12 @@ export default function AdminPage() {
 
   const checkAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    if (secret === "foodie2025") {
+    const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "foodie2025";
+    if (secret === expectedSecret) {
       setIsAuthenticated(true);
       fetchPendingItems();
     } else {
-      alert("Invalid secret");
+      alert(t("invalidSecret"));
     }
   };
 
@@ -32,7 +36,7 @@ export default function AdminPage() {
 
     if (error) {
       console.error(error);
-      alert("Failed to fetch pending items");
+      alert(t("fetchError"));
     } else {
       setPendingItems(data as any);
     }
@@ -55,7 +59,7 @@ export default function AdminPage() {
       setPendingItems((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       console.error(err);
-      alert(`Failed to ${action} item`);
+      alert(t("actionError"));
     } finally {
       setActionLoading(null);
     }
@@ -63,61 +67,100 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <form onSubmit={checkAuth} className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-          <h1 className="text-2xl font-bold mb-4 text-center">Admin Login</h1>
-          <input
-            type="password"
-            value={secret}
-            onChange={(e) => setSecret(e.target.value)}
-            className="w-full p-2 border rounded mb-4 text-black dark:text-white dark:bg-gray-700"
-            placeholder="Enter secret"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700"
+      <div 
+        className="min-h-screen flex items-center justify-center px-4"
+        style={{ background: "var(--bg-primary)" }}
+      >
+        <form 
+          onSubmit={checkAuth} 
+          className="w-full max-w-md p-10 rounded-[2rem] shadow-xl text-center"
+          style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)" }}
+        >
+          <motion.div
+            animate={{ rotate: [0, -10, 10, -10, 10, 0], scale: [1, 1.1, 1] }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-6xl mb-6"
           >
-            Enter
-          </button>
+            🔐
+          </motion.div>
+          <h1 
+            className="text-3xl font-black mb-2"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {t("loginTitle")}
+          </h1>
+          <p 
+            className="text-base mb-8"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {t("loginDesc")}
+          </p>
+          
+          <div className="mb-6 text-left">
+            <input
+              type="password"
+              value={secret}
+              onChange={(e) => setSecret(e.target.value)}
+              className="form-input w-full"
+              placeholder={t("passwordPlaceholder")}
+            />
+          </div>
+          
+          <motion.button
+            type="submit"
+            className="w-full rounded-xl font-bold text-white flex items-center justify-center gap-2"
+            style={{
+              padding: '16px 24px',
+              background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {t("loginBtn")}
+          </motion.button>
         </form>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-8 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div 
+      className="min-h-screen p-8"
+      style={{ background: "var(--bg-primary)", color: "var(--text-primary)" }}
+    >
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-black">Admin Review Dashboard</h1>
+          <h1 className="text-3xl font-black">{t("dashboardTitle")}</h1>
           <button
             onClick={fetchPendingItems}
-            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600"
+            className="px-4 py-2 rounded-lg font-bold transition-all"
+            style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", color: "var(--text-primary)" }}
           >
-            Refresh
+            {t("refreshBtn")}
           </button>
         </div>
 
         {loading ? (
-          <p className="text-center text-gray-500">Loading pending items...</p>
+          <p className="text-center" style={{ color: "var(--text-muted)" }}>{t("loading")}</p>
         ) : pendingItems.length === 0 ? (
-          <p className="text-center text-gray-500 bg-white dark:bg-gray-800 p-8 rounded-xl">
-            No pending items to review! 🎉
+          <p className="text-center p-8 rounded-xl" style={{ color: "var(--text-muted)", background: "var(--bg-card)", border: "1px solid var(--border-color)" }}>
+            {t("empty")}
           </p>
         ) : (
           <div className="grid gap-6">
             {pendingItems.map((item) => (
-              <div key={item.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+              <div key={item.id} className="p-6 rounded-xl shadow-md transition-all" style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)" }}>
                 <div className="flex justify-between items-start gap-4">
                   <div>
                     <h2 className="text-xl font-bold mb-2">
-                      {item.name} <span className="text-sm font-normal text-gray-500">by {item.submittedBy || item.submitted_by}</span>
+                      {item.name} <span className="text-sm font-normal text-gray-500">{t("by")} {item.submittedBy || (item as any).submitted_by}</span>
                     </h2>
-                    <p className="mb-2"><strong>Review:</strong> {item.description}</p>
+                    <p className="mb-2"><strong>{t("review")}</strong> {item.description}</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      <strong>Address:</strong> {item.address} ({item.area})<br />
-                      <strong>Category:</strong> {item.category}<br />
-                      <strong>Vibes:</strong> {(item.vibes || []).join(", ")}<br />
-                      <strong>Funny Score:</strong> {item.funnyScore || (item as any).funny_score}/5
+                      <strong>{t("address")}</strong> {item.address} ({item.area})<br />
+                      <strong>{t("category")}</strong> {item.category}<br />
+                      <strong>{t("vibes")}</strong> {(item.vibes || []).join(", ")}<br />
+                      <strong>{t("funnyScore")}</strong> {item.funnyScore || (item as any).funny_score}/5
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 min-w-[120px]">
@@ -126,14 +169,14 @@ export default function AdminPage() {
                       disabled={actionLoading === item.id}
                       className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 disabled:opacity-50"
                     >
-                      {actionLoading === item.id ? "..." : "Approve"}
+                      {actionLoading === item.id ? "..." : t("approveBtn")}
                     </button>
                     <button
                       onClick={() => handleAction(item.id, "reject")}
                       disabled={actionLoading === item.id}
                       className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
                     >
-                      {actionLoading === item.id ? "..." : "Reject"}
+                      {actionLoading === item.id ? "..." : t("rejectBtn")}
                     </button>
                   </div>
                 </div>
