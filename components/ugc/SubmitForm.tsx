@@ -135,13 +135,14 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         </div>
         <motion.button
           onClick={onClose}
-          className="rounded-full font-bold text-white transition-all min-w-[120px] whitespace-nowrap"
+          className="rounded-2xl font-bold text-white transition-all min-w-[140px] whitespace-nowrap mt-6 text-lg"
           style={{
-            padding: '12px 28px',
+            padding: '16px 32px',
             background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
-            letterSpacing: '2px'
+            letterSpacing: '2px',
+            boxShadow: "0 8px 20px -6px rgba(245, 166, 35, 0.5)"
           }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.05, boxShadow: "0 12px 24px -8px rgba(245, 166, 35, 0.6)" }}
           whileTap={{ scale: 0.95 }}
         >
           {t("close")}
@@ -151,16 +152,16 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <div className="text-center mb-2">
-        <span className="text-4xl">📝</span>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 sm:gap-8">
+      <div className="text-center mb-2 sm:mb-4">
+        <span className="text-5xl drop-shadow-md">📝</span>
         <h2
-          className="text-2xl font-black mt-2"
+          className="text-2xl sm:text-3xl font-black mt-4 tracking-tight"
           style={{ color: "var(--text-primary)" }}
         >
           {t("mainTitle")}
         </h2>
-        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
+        <p className="text-sm sm:text-base mt-2" style={{ color: "var(--text-muted)" }}>
           {t("mainDesc")}
         </p>
       </div>
@@ -215,7 +216,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       </div>
 
       {/* Address + Area */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
         <div>
           <label className="form-label">
             {t("addressLabel")}
@@ -274,7 +275,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
           name="vibes"
           control={control}
           render={({ field }) => (
-            <div className="flex flex-wrap gap-2 mt-1">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mt-2">
               {VIBE_OPTIONS.map((vibe) => {
                 const isSelected = (field.value || []).includes(vibe.id);
                 return (
@@ -311,7 +312,7 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         <label className="form-label">
           {t("funnyScoreLabel")} {t(`funnyScoreDesc${funnyScore}` as any)}
         </label>
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-2 sm:gap-4 mt-3">
           {[1, 2, 3, 4, 5].map((score) => (
             <motion.button
               key={score}
@@ -394,13 +395,13 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
       </div>
 
       {/* Submit button */}
-      <div className="flex gap-3 pt-2">
+      <div className="flex gap-4 pt-4 sm:pt-6 mt-4">
         <motion.button
           type="button"
           onClick={onClose}
-          className="flex-1 rounded-xl font-semibold border-2 transition-all"
+          className="flex-1 rounded-2xl font-semibold border-2 transition-all text-base sm:text-lg"
           style={{
-            padding: '12px 24px',
+            padding: '16px 24px',
             borderColor: "var(--border-color)",
             color: "var(--text-secondary)",
             background: "transparent",
@@ -413,15 +414,16 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         <motion.button
           type="submit"
           disabled={status === "submitting"}
-          className="flex-1 rounded-xl font-bold text-white flex items-center justify-center gap-2"
+          className="flex-1 rounded-2xl font-bold text-white flex items-center justify-center gap-2 text-base sm:text-lg"
           style={{
-            padding: '12px 24px',
+            padding: '16px 24px',
             background: status === "submitting"
               ? "var(--border-color)"
               : "linear-gradient(135deg, #F5A623, #FF6B6B)",
             cursor: status === "submitting" ? "not-allowed" : "pointer",
+            boxShadow: status !== "submitting" ? "0 8px 20px -6px rgba(245, 166, 35, 0.5)" : "none"
           }}
-          whileHover={status !== "submitting" ? { scale: 1.02 } : {}}
+          whileHover={status !== "submitting" ? { scale: 1.02, boxShadow: "0 12px 24px -8px rgba(245, 166, 35, 0.6)" } : {}}
           whileTap={status !== "submitting" ? { scale: 0.98 } : {}}
         >
           {status === "submitting" ? (
