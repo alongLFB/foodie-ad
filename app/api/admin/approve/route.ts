@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const secret = searchParams.get("secret");
 
-    const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "foodie2025";
+    const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "admin";
     // Simple security check for V1
     if (secret !== expectedSecret) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

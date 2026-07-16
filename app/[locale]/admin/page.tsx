@@ -16,7 +16,7 @@ export default function AdminPage() {
 
   const checkAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "foodie2025";
+    const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "admin";
     if (secret === expectedSecret) {
       setIsAuthenticated(true);
       fetchPendingItems();
