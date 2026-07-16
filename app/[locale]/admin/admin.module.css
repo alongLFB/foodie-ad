@@ -1,0 +1,10 @@
+.card {
+  padding: 40px 24px;
+  border-radius: 32px;
+}
+@media (min-width: 640px) {
+  .card {
+    padding: 56px 40px;
+    border-radius: 40px;
+  }
+}

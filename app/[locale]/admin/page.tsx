@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { supabase } from "@/lib/supabase";
 import { Restaurant } from "@/types";
+import styles from "./admin.module.css";
 
 export default function AdminPage() {
   const t = useTranslations("AdminPage");
@@ -68,60 +69,57 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center px-6"
+        className="min-h-screen flex items-center justify-center px-4"
         style={{ background: "var(--bg-primary)" }}
       >
         <form 
           onSubmit={checkAuth} 
-          className="w-full max-w-md shadow-2xl flex flex-col items-center"
+          className={`${styles.card} w-full max-w-md shadow-2xl flex flex-col items-center gap-6`}
           style={{ 
             background: "var(--bg-card)", 
-            border: "1px solid var(--border-color)",
-            borderRadius: "40px",
-            padding: "50px 40px",
-            gap: "24px"
+            border: "1px solid var(--border-color)"
           }}
         >
           <motion.div
             animate={{ rotate: [0, -10, 10, -10, 10, 0], scale: [1, 1.1, 1] }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-7xl drop-shadow-md mb-2"
+            className="text-6xl sm:text-7xl drop-shadow-md mb-2"
           >
             🔐
           </motion.div>
           
-          <div className="text-center w-full">
+          <div className="text-center w-full mb-2">
             <h1 
-              className="text-3xl font-black mb-3 tracking-tight"
+              className="text-2xl sm:text-3xl font-black mb-3 tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               {t("loginTitle")}
             </h1>
             <p 
-              className="text-[15px]"
+              className="text-sm sm:text-[15px]"
               style={{ color: "var(--text-secondary)" }}
             >
               {t("loginDesc")}
             </p>
           </div>
           
-          <div className="w-full mt-4">
+          <div className="w-full">
             <input
               type="password"
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
-              className="form-input w-full text-center tracking-widest text-lg transition-all"
+              className="form-input w-full text-center tracking-widest text-base sm:text-lg transition-all"
               placeholder={t("passwordPlaceholder")}
-              style={{ padding: "18px 24px", borderRadius: "20px" }}
+              style={{ padding: "16px 20px", borderRadius: "16px" }}
             />
           </div>
           
           <motion.button
             type="submit"
-            className="w-full font-bold text-white flex items-center justify-center gap-2 text-lg mt-2"
+            className="w-full font-bold text-white flex items-center justify-center gap-2 text-base sm:text-lg mt-2"
             style={{
-              padding: '18px 24px',
-              borderRadius: "20px",
+              padding: '16px 20px',
+              borderRadius: "16px",
               background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
               boxShadow: "0 8px 20px -6px rgba(245, 166, 35, 0.5)"
             }}
