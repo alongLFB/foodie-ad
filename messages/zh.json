@@ -32,7 +32,9 @@
     "approved": "推荐",
     "spice": "辣度：",
     "theTea": "毒舌点评：",
-    "by": "点评人："
+    "by": "点评人：",
+    "official": "官方精选",
+    "ugc": "网友爆料"
   },
   "Submit": {
     "btnText": "我要爆料",

@@ -32,7 +32,9 @@
     "approved": "Approved",
     "spice": "Spice:",
     "theTea": "The Tea:",
-    "by": "By:"
+    "by": "By:",
+    "official": "Official Pick",
+    "ugc": "User Submitted"
   },
   "Submit": {
     "btnText": "Spill The Tea",

@@ -118,12 +118,29 @@ export function RestaurantCard({
         className="flex flex-col relative" 
         style={{ padding: '16px 20px 24px 20px', gap: '12px' }}
       >
-        <h3
-          className="font-bold text-2xl line-clamp-1"
-          style={{ color: "var(--text-primary)" }}
-        >
-          {name}
-        </h3>
+        <div className="flex items-center gap-2 mb-1">
+          <h3
+            className="font-bold text-2xl line-clamp-1"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {name}
+          </h3>
+          {restaurant.submittedBy ? (
+            <span 
+              className="text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap shrink-0"
+              style={{ background: "rgba(16, 185, 129, 0.1)", color: "#10B981", border: "1px solid rgba(16, 185, 129, 0.2)" }}
+            >
+              👤 {t("ugc")}
+            </span>
+          ) : (
+            <span 
+              className="text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap shrink-0"
+              style={{ background: "rgba(245, 166, 35, 0.1)", color: "#F5A623", border: "1px solid rgba(245, 166, 35, 0.2)" }}
+            >
+              🌟 {t("official")}
+            </span>
+          )}
+        </div>
 
         {/* Funny Quote */}
         <div

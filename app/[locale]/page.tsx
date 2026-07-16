@@ -9,8 +9,8 @@ import VibeFilter from "@/components/filters/VibeFilter";
 import RestaurantGrid from "@/components/restaurants/RestaurantGrid";
 import SubmitButton from "@/components/ugc/SubmitButton";
 import dynamic from "next/dynamic";
-import { getApprovedRestaurants, filterByVibe } from "@/lib/data";
-import { VibeTag } from "@/types";
+import { filterByVibe } from "@/lib/data";
+import { VibeTag, Restaurant } from "@/types";
 
 const FoodieMap = dynamic(() => import("@/components/map/FoodieMap"), {
   ssr: false,
@@ -35,14 +35,24 @@ export default function HomePage() {
   const [showMap, setShowMap] = useState(false);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]);
+  const [isLoadingRestaurants, setIsLoadingRestaurants] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    fetch("/api/restaurants")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.restaurants) {
+          setAllRestaurants(data.restaurants);
+        }
+      })
+      .catch((err) => console.error("Failed to load restaurants:", err))
+      .finally(() => setIsLoadingRestaurants(false));
   }, []);
 
   const isDark = mounted ? resolvedTheme === "dark" : false;
 
-  const allRestaurants = getApprovedRestaurants();
   const filteredRestaurants = useMemo(
     () => filterByVibe(allRestaurants, activeVibe),
     [activeVibe, allRestaurants]
