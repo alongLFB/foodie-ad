@@ -135,9 +135,11 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         </div>
         <motion.button
           onClick={onClose}
-          className="px-8 py-3 rounded-full font-bold text-white"
+          className="rounded-full font-bold text-white transition-all min-w-[120px] whitespace-nowrap"
           style={{
+            padding: '12px 28px',
             background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
+            letterSpacing: '2px'
           }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
