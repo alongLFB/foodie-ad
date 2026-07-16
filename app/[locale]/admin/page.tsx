@@ -68,52 +68,64 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div 
-        className="min-h-screen flex items-center justify-center px-4"
+        className="min-h-screen flex items-center justify-center px-6"
         style={{ background: "var(--bg-primary)" }}
       >
         <form 
           onSubmit={checkAuth} 
-          className="w-full max-w-md p-10 rounded-[2rem] shadow-xl text-center"
-          style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)" }}
+          className="w-full max-w-md shadow-2xl flex flex-col items-center"
+          style={{ 
+            background: "var(--bg-card)", 
+            border: "1px solid var(--border-color)",
+            borderRadius: "40px",
+            padding: "50px 40px",
+            gap: "24px"
+          }}
         >
           <motion.div
             animate={{ rotate: [0, -10, 10, -10, 10, 0], scale: [1, 1.1, 1] }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-6xl mb-6"
+            className="text-7xl drop-shadow-md mb-2"
           >
             🔐
           </motion.div>
-          <h1 
-            className="text-3xl font-black mb-2"
-            style={{ color: "var(--text-primary)" }}
-          >
-            {t("loginTitle")}
-          </h1>
-          <p 
-            className="text-base mb-8"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            {t("loginDesc")}
-          </p>
           
-          <div className="mb-6 text-left">
+          <div className="text-center w-full">
+            <h1 
+              className="text-3xl font-black mb-3 tracking-tight"
+              style={{ color: "var(--text-primary)" }}
+            >
+              {t("loginTitle")}
+            </h1>
+            <p 
+              className="text-[15px]"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {t("loginDesc")}
+            </p>
+          </div>
+          
+          <div className="w-full mt-4">
             <input
               type="password"
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
-              className="form-input w-full"
+              className="form-input w-full text-center tracking-widest text-lg transition-all"
               placeholder={t("passwordPlaceholder")}
+              style={{ padding: "18px 24px", borderRadius: "20px" }}
             />
           </div>
           
           <motion.button
             type="submit"
-            className="w-full rounded-xl font-bold text-white flex items-center justify-center gap-2"
+            className="w-full font-bold text-white flex items-center justify-center gap-2 text-lg mt-2"
             style={{
-              padding: '16px 24px',
+              padding: '18px 24px',
+              borderRadius: "20px",
               background: "linear-gradient(135deg, #F5A623, #FF6B6B)",
+              boxShadow: "0 8px 20px -6px rgba(245, 166, 35, 0.5)"
             }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 12px 24px -8px rgba(245, 166, 35, 0.6)" }}
             whileTap={{ scale: 0.98 }}
           >
             {t("loginBtn")}
