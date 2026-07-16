@@ -133,7 +133,7 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
 
             {/* Content Body */}
             <div className="overflow-y-auto" style={{ padding: '24px 32px 32px 32px' }}>
-              <div className="flex justify-between items-start gap-4 mb-4">
+              <div className="flex justify-between items-start gap-4" style={{ marginBottom: '24px' }}>
                 <h2 className="text-3xl font-black text-[var(--text-primary)] leading-tight">
                   {name}
                 </h2>
@@ -151,18 +151,19 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
 
               {/* Quotes & Vibes */}
               <div
-                className="text-lg italic mb-6 rounded-2xl"
+                className="text-lg italic rounded-2xl"
                 style={{
                   padding: '16px 20px',
                   background: "rgba(245, 166, 35, 0.08)",
                   color: "var(--text-secondary)",
                   borderLeft: "4px solid var(--color-saffron)",
+                  marginBottom: '24px'
                 }}
               >
                 "{quote}"
               </div>
 
-              <div className="flex items-center gap-6 mb-8 pb-8 border-b border-[var(--border-color)] text-[var(--text-secondary)]">
+              <div className="flex items-center gap-6 border-b border-[var(--border-color)] text-[var(--text-secondary)]" style={{ marginBottom: '24px', paddingBottom: '24px' }}>
                 <span className={`font-semibold price-${restaurant.priceLevel}`}>
                   {priceDisplay}
                 </span>
@@ -170,14 +171,14 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
               </div>
 
               {/* Info section */}
-              <div className="space-y-4 mb-8">
-                <p className="text-lg leading-relaxed text-[var(--text-primary)]">
+              <div className="mb-8" style={{ marginBottom: '40px' }}>
+                <p className="text-lg leading-relaxed text-[var(--text-primary)]" style={{ marginBottom: '20px' }}>
                   {desc}
                 </p>
                 
                 {/* Vibes */}
                 {restaurant.vibes.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-4">
+                  <div className="flex flex-wrap gap-2" style={{ marginTop: '16px' }}>
                     {restaurant.vibes.map((vibe) => {
                       const vObj = VIBE_OPTIONS.find(v => v.id === vibe);
                       const vText = vObj ? (locale === "zh" ? `${vObj.emoji} ${vObj.labelZh}` : `${vObj.emoji} ${vObj.labelEn}`) : vibe.replace(/-/g, " ");
@@ -200,13 +201,13 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                 )}
                 
                 {restaurant.mustOrder && (
-                  <div className="bg-[rgba(245,166,35,0.1)] border-l-4 border-[#F5A623] rounded-r-2xl p-4 mt-6 text-[var(--text-primary)]">
+                  <div className="bg-[rgba(245,166,35,0.1)] border-l-4 border-[#F5A623] rounded-r-2xl p-4 text-[var(--text-primary)]" style={{ marginTop: '24px' }}>
                     <span className="font-bold block mb-1">🔥 {locale === "zh" ? "必点推荐 / Must Order:" : "Must Order:"}</span>
                     <span className="text-[var(--text-secondary)]">{restaurant.mustOrder}</span>
                   </div>
                 )}
                 
-                <div className="bg-[var(--bg-secondary)] rounded-2xl p-5 mt-6 space-y-3 text-[var(--text-secondary)]">
+                <div className="bg-[var(--bg-secondary)] rounded-2xl p-5 space-y-3 text-[var(--text-secondary)]" style={{ marginTop: '24px' }}>
                   {restaurant.hours && (
                     <div className="flex items-start gap-3">
                       <span className="shrink-0 mt-0.5">🕒</span>
@@ -232,7 +233,7 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                     </div>
                   )}
                   {restaurant.submittedBy && (
-                    <div className="flex items-start gap-3 pt-2 border-t border-[var(--border-color)]">
+                    <div className="flex items-start gap-3 border-t border-[var(--border-color)]" style={{ paddingTop: '12px', marginTop: '8px' }}>
                       <span className="shrink-0 mt-0.5">👤</span>
                       <span className="italic text-sm">{locale === "zh" ? "爆料人：" : "Submitted by: "} {restaurant.submittedBy}</span>
                     </div>
@@ -240,18 +241,20 @@ export default function RestaurantModal({ restaurant, isOpen, onClose }: Restaur
                 </div>
               </div>
 
-              <button
-                onClick={handleShare}
-                disabled={isGenerating}
-                className="w-full rounded-2xl font-bold text-white text-lg flex items-center justify-center shadow-lg disabled:opacity-70 transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{ 
-                  padding: '16px 24px',
-                  gap: '8px',
-                  background: "linear-gradient(135deg, #F5A623, #FF6B6B)" 
-                }}
-              >
-                {isGenerating ? "生成中..." : "📸 导出分享海报"}
-              </button>
+              <div style={{ marginTop: '32px', marginBottom: '16px' }}>
+                <button
+                  onClick={handleShare}
+                  disabled={isGenerating}
+                  className="w-full rounded-2xl font-bold text-white text-lg flex items-center justify-center shadow-lg disabled:opacity-70 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{ 
+                    padding: '16px 24px',
+                    gap: '8px',
+                    background: "linear-gradient(135deg, #F5A623, #FF6B6B)" 
+                  }}
+                >
+                  {isGenerating ? "生成中..." : "📸 导出分享海报"}
+                </button>
+              </div>
             </div>
             
             {/* Hidden Poster Element for html-to-image */}
