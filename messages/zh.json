@@ -99,6 +99,15 @@
     "cancel": "取消",
     "submitting": "提交中...",
     "submitBtn": "提交爆料！",
-    "errorMsg": "❌ 提交失败，请再试一次"
+    "errorMsg": "❌ 提交失败，请再试一次",
+    "cat_chinese": "中餐",
+    "cat_arabic": "阿拉伯/中东",
+    "cat_indian": "印度菜",
+    "cat_western": "西餐/美式",
+    "cat_japanese": "日料",
+    "cat_seafood": "海鲜",
+    "cat_cafe": "咖啡/早午餐",
+    "cat_dessert": "甜品",
+    "cat_fast-food": "快餐"
   }
 }

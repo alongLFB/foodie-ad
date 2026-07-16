@@ -19,16 +19,16 @@ const AREAS = [
   "Khalifa City", "Mohammed Bin Zayed City", "Other",
 ];
 
-const CATEGORIES: { value: FoodCategory; label: string }[] = [
-  { value: "chinese", label: `${CATEGORY_EMOJI.chinese} Chinese` },
-  { value: "arabic", label: `${CATEGORY_EMOJI.arabic} Arabic/Middle Eastern` },
-  { value: "indian", label: `${CATEGORY_EMOJI.indian} Indian` },
-  { value: "western", label: `${CATEGORY_EMOJI.western} Western/American` },
-  { value: "japanese", label: `${CATEGORY_EMOJI.japanese} Japanese` },
-  { value: "seafood", label: `${CATEGORY_EMOJI.seafood} Seafood` },
-  { value: "cafe", label: `${CATEGORY_EMOJI.cafe} Café/Brunch` },
-  { value: "dessert", label: `${CATEGORY_EMOJI.dessert} Desserts` },
-  { value: "fast-food", label: `${CATEGORY_EMOJI["fast-food"]} Fast Food` },
+const CATEGORIES: { value: FoodCategory }[] = [
+  { value: "chinese" },
+  { value: "arabic" },
+  { value: "indian" },
+  { value: "western" },
+  { value: "japanese" },
+  { value: "seafood" },
+  { value: "cafe" },
+  { value: "dessert" },
+  { value: "fast-food" },
 ];
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
@@ -253,7 +253,9 @@ export default function SubmitForm({ onClose }: SubmitFormProps) {
         >
           <option value="">{t("categorySelect")}</option>
           {CATEGORIES.map((c) => (
-            <option key={c.value} value={c.value}>{c.label}</option>
+            <option key={c.value} value={c.value}>
+              {CATEGORY_EMOJI[c.value]} {t(`cat_${c.value}` as any)}
+            </option>
           ))}
         </select>
         {errors.category && <p className="form-error">{errors.category.message}</p>}

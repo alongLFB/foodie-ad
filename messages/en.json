@@ -99,6 +99,15 @@
     "cancel": "Cancel",
     "submitting": "Submitting...",
     "submitBtn": "Submit Spot!",
-    "errorMsg": "❌ Submission failed, please try again"
+    "errorMsg": "❌ Submission failed, please try again",
+    "cat_chinese": "Chinese",
+    "cat_arabic": "Arabic/Middle Eastern",
+    "cat_indian": "Indian",
+    "cat_western": "Western/American",
+    "cat_japanese": "Japanese",
+    "cat_seafood": "Seafood",
+    "cat_cafe": "Café/Brunch",
+    "cat_dessert": "Desserts",
+    "cat_fast-food": "Fast Food"
   }
 }
