@@ -35,3 +35,33 @@ export const ugcSubmissionSchema = z.object({
 });
 
 export type UGCSubmissionSchema = z.infer<typeof ugcSubmissionSchema>;
+
+export const adminSubmissionSchema = z.object({
+  name: z.string().min(2).max(100),
+  nameZh: z.string().max(100).optional(),
+  category: z.string().min(1),
+  area: z.string().min(1),
+  address: z.string().min(1),
+  rating: z.coerce.number().min(0).max(5),
+  lat: z.coerce.number().optional(),
+  lng: z.coerce.number().optional(),
+  funnyQuote: z.string().optional(),
+  funnyQuoteZh: z.string().optional(),
+  description: z.string().optional(),
+  descriptionZh: z.string().optional(),
+  funnyScore: z.coerce.number().min(1).max(5).optional(),
+  priceLevel: z.coerce.number().min(0).max(5).optional(),
+  priceRange: z.string().optional(),
+  mustOrder: z.string().optional(),
+  parking: z.string().optional(),
+  hours: z.string().optional(),
+  phone: z.string().optional(),
+  googleMapsUrl: z.string().url().optional().or(z.literal("")),
+  coverImage: z.string().url().optional().or(z.literal("")),
+  images: z.array(z.string()).optional(),
+  vibes: z.array(z.string()).optional(),
+  submittedBy: z.string().optional(),
+  status: z.string().optional(),
+});
+
+export type AdminSubmissionSchema = z.infer<typeof adminSubmissionSchema>;
