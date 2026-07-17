@@ -17,6 +17,9 @@ export async function GET(request: NextRequest) {
         // Map snake_case to camelCase
         supabaseRestaurants = data.map((item) => ({
           ...item,
+          nameZh: item.name_zh,
+          descriptionZh: item.description_zh,
+          funnyQuoteZh: item.funny_quote_zh,
           funnyScore: item.funny_score,
           priceRange: item.price_range,
           mustOrder: item.must_order,
@@ -26,11 +29,11 @@ export async function GET(request: NextRequest) {
           coverImage: item.cover_image || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
           images: item.images || [],
           // Provide some defaults if missing
-          lat: item.lat || 24.4539,
-          lng: item.lng || 54.3773,
-          rating: item.rating || 0,
-          funnyQuote: item.funny_quote || "Good vibes only.",
-          priceLevel: item.price_level || 2,
+          lat: item.lat ?? 24.4539,
+          lng: item.lng ?? 54.3773,
+          rating: item.rating ?? 0,
+          funnyQuote: item.funny_quote !== null && item.funny_quote !== undefined && item.funny_quote !== "" ? item.funny_quote : "Good vibes only.",
+          priceLevel: item.price_level ?? 2,
         }));
       }
     }
